@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HQ Gospel Studio - Edição Profissional</title>
+    <style>
+        /* ========================================================
+           DESIGN SYSTEM - HQ ÉPICA DARK MODE
+           ======================================================== */
+        :root {
+            --fundo-base: #0a0d13;
+            --fundo-card: #131822;
+            --fundo-card-hover: #1a2230;
+            --borda: #252e3e;
+            --borda-foco: #f59e0b;
+            --dourado: #f59e0b;
+            --dourado-claro: #fbbf24;
+            --texto-principal: #f3f4f6;
+            --texto-secundario: #9ca3af;
+            --azul-destaque: #3b82f6;
+            --vermelho-alerta: #ef4444;
+            --verde-sucesso: #10b981;
+            --balao-fala: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--fundo-base);
+            color: var(--texto-principal);
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 1050px;
+        }
+
+        /* Top Bar de Ações e Cabeçalho */
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--borda);
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            color: var(--dourado);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            color: var(--texto-secundario);
+            font-size: 0.95rem;
+        }
+
+        /* Barra de Ferramentas Superior */
+        .barra-ferramentas {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: var(--fundo-card);
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--borda);
+            margin-bottom: 25px;
+        }
+
+        .grupo-botoes-topo {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-acao {
+            background: #1c2433;
+            color: var(--texto-principal);
+            border: 1px solid var(--borda);
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-acao:hover {
+            border-color: var(--dourado);
+            color: var(--dourado);
+        }
+
+        .status-salvo {
+            font-size: 0.8rem;
+            color: var(--verde-sucesso);
+            font-weight: 600;
+        }
+
+        /* Painel do Roteirista */
+        .painel-config {
+            background: var(--fundo-card);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .linha-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .campo {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--dourado);
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 11px 14px;
+            background: var(--fundo-base);
+            border: 1px solid var(--borda);
+            border-radius: 8px;
+            color: var(--texto-principal);
+            font-size: 0.95rem;
+            transition: 0.2s border;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--dourado);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .estilos-rapidos {
+            display: flex;
+            gap: 8px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+
+        .btn-tag {
+            background: #18202c;
+            border: 1px solid var(--borda);
+            color: var(--texto-secundario);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-tag:hover {
+            color: var(--dourado);
+            border-color: var(--dourado);
+        }
+
+        .btn-gerar-master {
+            width: 100%;
+            padding: 15px;
+            background: var(--dourado);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.2s all;
+            margin-top: 10px;
+            letter-spacing: 1px;
+        }
+
+        .btn-gerar-master:hover {
+            background: var(--dourado-claro);
+            transform: translateY(-2px);
+        }
+
+        .btn-gerar-master:disabled {
+            background: #4b5563;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-box {
+            display: none;
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--dourado);
+            margin: 20px 0;
+            font-weight: bold;
+        }
+
+        /* Área da HQ Gerada */
+        #resultado-area {
+            display: none;
+        }
+
+        .cabecalho-hq {
+            background: var(--fundo-card);
+            border: 1px solid var(--borda);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .titulo-hq {
+            font-size: 1.8rem;
+            color: var(--dourado);
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+
+        .licao-hq {
+            color: #93c5fd;
+            font-style: italic;
+            font-size: 1rem;
+        }
+
+        /* Lista de Painéis */
+        .painel-card {
+            background: var(--fundo-card);
+            border: 2px solid var(--borda);
+            border-radius: 12px;
+            padding: 22px;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: border-color 0.2s;
+        }
+
+        .painel-card:hover {
+            border-color: #3b465c;
+        }
+
+        .painel-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--borda);
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .painel-badge {
+            background: var(--azul-destaque);
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .painel-controles {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-mini {
+            background: #1e2636;
+            color: var(--texto-secundario);
+            border: 1px solid var(--borda);
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-mini:hover {
+            color: var(--texto-principal);
+            border-color: var(--dourado);
+        }
+
+        .btn-mini.danger:hover {
+            color: #fff;
+            background: var(--vermelho-alerta);
+            border-color: var(--vermelho-alerta);
+        }
+
+        /* Layout Interno do Painel */
+        .painel-corpo {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .painel-corpo.com-preview {
+                grid-template-columns: 240px 1fr;
+            }
+        }
+
+        /* Área de Upload e Preview da Imagem */
+        .upload-area {
+            background: #0d1117;
+            border: 2px dashed var(--borda);
+            border-radius: 8px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: 0.2s border;
+        }
+
+        .upload-area:hover {
+            border-color: var(--dourado);
+        }
+
+        .upload-area img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .upload-label {
+            font-size: 0.8rem;
+            color: var(--texto-secundario);
+            pointer-events: none;
+        }
+
+        .btn-remover-img {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.7);
+            color: #fff;
+            border: none;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Campos Editáveis */
+        .secao-titulo {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dourado);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .editavel {
+            padding: 10px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 6px;
+            border: 1px solid transparent;
+            min-height: 40px;
+            margin-bottom: 12px;
+            cursor: text;
+        }
+
+        .editavel:focus {
+            outline: none;
+            border-color: var(--dourado);
+            background: rgba(0,0,0,0.5);
+        }
+
+        .bloco-falas {
+            background: var(--balao-fala);
+            border-left: 4px solid var(--azul-destaque);
+            color: #e2e8f0;
+        }
+
+        /* Prompt e Cópia */
+        .caixa-prompt {
+            display: flex;
+            gap: 8px;
+            background: #090c10;
+            border: 1px solid #1f2733;
+            padding: 10px;
+            border-radius: 6px;
+            align-items: flex-start;
+        }
+
+        .texto-prompt {
+            flex: 1;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #a7f3d0;
+            word-break: break-word;
+        }
+
+        .btn-copiar-mini {
+            background: #212a38;
+            color: var(--texto-principal);
+            border: 1px solid var(--borda);
+            padding: 6px 10px;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-copiar-mini:hover {
+            background: var(--dourado);
+            color: #000;
+        }
+
+        /* Adicionar Novo Painel */
+        .btn-adicionar-painel {
+            width: 100%;
+            padding: 14px;
+            background: #182232;
+            border: 2px dashed var(--borda);
+            color: var(--texto-secundario);
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 25px;
+            transition: all 0.2s;
+        }
+
+        .btn-adicionar-painel:hover {
+            border-color: var(--dourado);
+            color: var(--dourado);
+        }
+
+        /* Notificação Toast */
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: var(--dourado);
+            color: #000;
+            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            display: none;
+            z-index: 1000;
+        }
+
+        /* Impressão Limpa */
+        @media print {
+            body { background: #fff !important; color: #000 !important; padding: 0 !important; }
+            .painel-config, .barra-ferramentas, .painel-controles, .btn-copiar-mini, .btn-adicionar-painel, header { display: none !important; }
+            .painel-card { border: 1px solid #000 !important; page-break-inside: avoid; background: #fff !important; color: #000 !important; }
+            .editavel, .bloco-falas, .caixa-prompt { background: none !important; color: #000 !important; border: none !important; }
+            .texto-prompt { color: #555 !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Cabeçalho -->
+        <header>
+            <h1>HQ Gospel Studio</h1>
+            <p>Plataforma de Roteirização, Criação e Edição de Quadrinhos Bíblicos</p>
+        </header>
+
+        <!-- Barra de Ferramentas / Backup / Exportação -->
+        <div class="barra-ferramentas">
+            <div class="grupo-botoes-topo">
+                <button class="btn-acao" onclick="novaHQ()">📄 Nova HQ</button>
+                <button class="btn-acao" onclick="salvarProjetoArquivo()">💾 Baixar Projeto (.json)</button>
+                <button class="btn-acao" onclick="document.getElementById('importarInput').click()">📂 Abrir Projeto</button>
+                <input type="file" id="importarInput" style="display:none;" accept=".json" onchange="abrirProjetoArquivo(event)">
+            </div>
+            <div class="grupo-botoes-topo">
+                <button class="btn-acao" onclick="copiarTodosOsPrompts()">📋 Copiar Todos Prompts</button>
+                <button class="btn-acao" onclick="exportarRoteiroTexto()">📝 Baixar Roteiro (.txt)</button>
+                <button class="btn-acao" onclick="window.print()">🖨️ Imprimir / PDF</button>
+            </div>
+            <span class="status-salvo" id="statusSalvo">● Auto-salvo no navegador</span>
+        </div>
+
+        <!-- Painel de Criação e Parâmetros -->
+        <div class="painel-config">
+            <div class="campo">
+                <label for="cenaTema">Passagem Bíblica / Tema Central:</label>
+                <input type="text" id="cenaTema" placeholder="Ex: O Pentecostes e a descida do Espírito Santo em atos 2">
+            </div>
+
+            <div class="linha-grid">
+                <div>
+                    <label for="faixaEtaria">Público-Alvo:</label>
+                    <select id="faixaEtaria">
+                        <option value="Adolescentes (13 a 17 anos)">Adolescentes (13 a 17 anos)</option>
+                        <option value="Jovens / Universitários (18 a 25 anos)">Jovens / Universitários (18 a 25 anos)</option>
+                        <option value="Pré-Adolescentes (10 a 12 anos)">Pré-Adolescentes (10 a 12 anos)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="tomNarrativo">Tom Narrativo:</label>
+                    <select id="tomNarrativo">
+                        <option value="Ação Épica e Dinâmica">Ação Épica e Dinâmica</option>
+                        <option value="Emocionante e Profundo">Emocionante e Profundo</option>
+                        <option value="Reflexivo e Inspirador">Reflexivo e Inspirador</option>
+                        <option value="Urbano e Contemporâneo">Urbano e Contemporâneo</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="qtdPaineis">Quantidade de Painéis:</label>
+                    <select id="qtdPaineis">
+                        <option value="4">4 Painéis (Rápido / Redes Sociais)</option>
+                        <option value="6" selected>6 Painéis (Cena Completa)</option>
+                        <option value="8">8 Painéis (Capítulo Detalhado)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label>Estilos Visuais Rápidos:</label>
+                <div class="estilos-rapidos">
+                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Mangá Shonen japonês, cenas de alta energia e traços expressivos.')">🥋 Mangá Shonen</button>
+                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Webtoon digital com iluminação vibrante e foco em emoções juvenis.')">📱 Webtoon Moderno</button>
+                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Graphic Novel Clássica ocidental com pintura cinematográfica e realismo épico.')">🏛️ Graphic Novel Clássica</button>
+                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Arte Minimalista e Expressiva com contrastes marcantes de sombra e luz.')">🎨 Minimalista / Contraste</button>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="referencias">Suas Diretrizes Teológicas e Técnicas:</label>
+                <textarea id="referencias" placeholder="Ex: Manter rigor com o livro de Atos; Enfatizar a diversidade de povos e o fogo como presença acolhedora e poderosa; Linguagem empolgante."></textarea>
+            </div>
+
+            <button class="btn-gerar-master" id="btnGerar" onclick="gerarHQComIA()">⚡ Gerar Roteiro e Painéis da HQ</button>
+            <div class="loading-box" id="loadingTexto">✍️ O Gemini 3.8 Flash está estruturando a cena, as falas e os prompts visuais...</div>
+        </div>
+
+        <!-- Área dos Quadrinhos -->
+        <div id="resultado-area">
+            <div class="cabecalho-hq">
+                <div class="secao-titulo">Título da História (Clique para Editar):</div>
+                <div class="titulo-hq editavel" id="resTitulo" contenteditable="true" oninput="autoSalvar()">Título da HQ</div>
+                <div class="secao-titulo" style="margin-top:10px;">Mensagem Central:</div>
+                <div class="licao-hq editavel" id="resLicao" contenteditable="true" oninput="autoSalvar()">Mensagem Espiritual</div>
+            </div>
+
+            <!-- Lista Dinâmica de Painéis -->
+            <div id="listaPaineis"></div>
+
+            <button class="btn-adicionar-painel" onclick="adicionarPainelVazio()">➕ Adicionar Mais Um Painel</button>
+        </div>
+    </div>
+
+    <!-- Mensagem Flutuante (Toast) -->
+    <div class="toast" id="toast">Aviso do Sistema</div>
+
+    <!-- ========================================================
+         SCRIPT: LÓGICA DO ESTÚDIO COM AUTO-SAVE E GEMINI 3.8
+         ======================================================== -->
+    <script>
+        const CHAVE_API = "AQ.Ab8RN6KIK5ROBX1ZvuX2sHxKlNYO8BDg6JT28yoXjhMrTyeLZw";
+
+        // Estrutura que guarda a história ativa
+        let dadosHQ = {
+            titulo: "Título da História",
+            licao: "Lição para os jovens",
+            paineis: []
+        };
+
+        // Ao abrir a página: verifica se tem dados salvos na memória
+        window.addEventListener('DOMContentLoaded', () => {
+            const salvo = localStorage.getItem('hq_gospel_studio_dados');
+            if (salvo) {
+                try {
+                    dadosHQ = JSON.parse(salvo);
+                    if (dadosHQ.paineis && dadosHQ.paineis.length > 0) {
+                        renderizarPaineis();
+                        document.getElementById('resultado-area').style.display = 'block';
+                    }
+                } catch (e) {
+                    console.error("Erro ao carregar auto-save:", e);
+                }
+            }
+        });
+
+        function adicionarEstilo(texto) {
+            const campo = document.getElementById('referencias');
+            campo.value = campo.value ? campo.value + " | " + texto : texto;
+            mostrarToast("Estilo adicionado!");
+        }
+
+        async function gerarHQComIA() {
+            const tema = document.getElementById('cenaTema').value.trim();
+            const referencias = document.getElementById('referencias').value.trim();
+            const faixaEtaria = document.getElementById('faixaEtaria').value;
+            const tomNarrativo = document.getElementById('tomNarrativo').value;
+            const qtdPaineis = document.getElementById('qtdPaineis').value;
+
+            const btn = document.getElementById('btnGerar');
+            const loading = document.getElementById('loadingTexto');
+            const resultadoArea = document.getElementById('resultado-area');
+
+            if (!tema) {
+                alert("Por favor, digite o tema ou a passagem bíblica!");
+                return;
+            }
+
+            btn.disabled = true;
+            loading.style.display = "block";
+
+            // Prompt otimizado para retorno estrito em formato de dados
+            const promptMestre = `
+Você é um Roteirista Master de Histórias em Quadrinhos e especialista bíblico para jovens.
+Crie um roteiro sequencial completo para a seguinte produção:
+
+- TEMA/PASSAGEM: ${tema}
+- PÚBLICO-ALVO: ${faixaEtaria}
+- TOM NARRATIVO: ${tomNarrativo}
+- QUANTIDADE DE PAINÉIS: Exatamente ${qtdPaineis} painéis.
+- DIRETRIZES TÉCNICAS E TEOLÓGICAS: ${referencias || "Fidelidade bíblica com alta energia e relevância contemporânea."}
+
+RESPONDA EXCLUSIVAMENTE COM UM JSON VÁLIDO (sem qualquer texto ou formatação fora do JSON).
+Siga estritamente este molde:
+{
+  "titulo": "Título impactante",
+  "licao": "Lição transformadora para o jovem",
+  "paineis": [
+    {
+      "enquadramento": "Plano Médio / Close Dramático / etc",
+      "descricaoVisual": "Descrição detalhada do cenário, pose e emoção",
+      "falas": "[Nome Personagem]: 'Fala impactante' ou [Narrador]: 'Texto'",
+      "promptImagem": "cinematic comic book panel illustration, dramatic lighting, detailed, in english"
+    }
+  ]
+}
+`;
+
+            try {
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${CHAVE_API}`;
+
+                const resposta = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: promptMestre }] }]
+                    })
+                });
+
+                const dados = await resposta.json();
+
+                if (dados.candidates && dados.candidates[0].content.parts[0].text) {
+                    let textoPuro = dados.candidates[0].content.parts[0].text;
+                    // Limpa formatação Markdown
+                    textoPuro = textoPuro.replace(/```json/gi, '').replace(/```/gi, '').trim();
+
+                    dadosHQ = JSON.parse(textoPuro);
+                    renderizarPaineis();
+                    autoSalvar();
+
+                    resultadoArea.style.display = "block";
+                    mostrarToast("HQ Gerada com Sucesso!");
+                    resultadoArea.scrollIntoView({ behavior: 'smooth' });
+                } else {
+                    alert("Erro retornado pelo Gemini: " + (dados.error ? dados.error.message : "Resposta em formato inesperado."));
+                }
+            } catch (erro) {
+                console.error("Erro na geração:", erro);
+                alert("Falha de conexão com a IA. Tente clicar novamente.");
+            } finally {
+                btn.disabled = false;
+                loading.style.display = "none";
+            }
+        }
+
+        // Renderiza todos os cartões na tela
+        function renderizarPaineis() {
+            document.getElementById('resTitulo').innerText = dadosHQ.titulo || "Título da História";
+            document.getElementById('resLicao').innerText = dadosHQ.licao || "Mensagem Central";
+
+            const container = document.getElementById('listaPaineis');
+            container.innerHTML = "";
+
+            dadosHQ.paineis.forEach((painel, index) => {
+                const card = document.createElement('div');
+                card.className = "painel-card";
+                card.id = `card-painel-${index}`;
+
+                card.innerHTML = `
+                    <div class="painel-topo">
+                        <span class="painel-badge">Quadro ${index + 1} • <span class="editavel-mini" contenteditable="true" onblur="atualizarPainel(${index}, 'enquadramento', this.innerText)">${painel.enquadramento || 'Cena'}</span></span>
+                        
+                        <div class="painel-controles">
+                            <button class="btn-mini" onclick="moverPainel(${index}, -1)" title="Mover para Cima">▲</button>
+                            <button class="btn-mini" onclick="moverPainel(${index}, 1)" title="Mover para Baixo">▼</button>
+                            <button class="btn-mini danger" onclick="excluirPainel(${index})" title="Excluir Painel">🗑️ Excluir</button>
+                        </div>
+                    </div>
+
+                    <div class="painel-corpo ${painel.imagem ? 'com-preview' : ''}">
+                        <!-- Área de Anexar Imagem -->
+                        <div class="upload-area" onclick="document.getElementById('file-${index}').click()">
+                            ${painel.imagem 
+                                ? `<img src="${painel.imagem}" alt="Preview">
+                                   <button class="btn-remover-img" style="display:block;" onclick="event.stopPropagation(); removerImagem(${index})">✕ Remover</button>` 
+                                : `<span class="upload-label">🖼️ Clique para anexar a arte gerada deste quadro</span>`
+                            }
+                            <input type="file" id="file-${index}" style="display:none;" accept="image/*" onchange="carregarImagemPainel(event, ${index})">
+                        </div>
+
+                        <!-- Conteúdo Textual -->
+                        <div>
+                            <div class="secao-titulo">🎬 Descrição Visual da Cena:</div>
+                            <div class="editavel" contenteditable="true" onblur="atualizarPainel(${index}, 'descricaoVisual', this.innerText)">${painel.descricaoVisual || ''}</div>
+
+                            <div class="secao-titulo">💬 Balões de Fala & Recordatório:</div>
+                            <div class="editavel bloco-falas" contenteditable="true" onblur="atualizarPainel(${index}, 'falas', this.innerText)">${painel.falas || ''}</div>
+
+                            <div class="secao-titulo">🎨 Prompt de Imagem (IA):</div>
+                            <div class="caixa-prompt">
+                                <div class="texto-prompt editavel" contenteditable="true" onblur="atualizarPainel(${index}, 'promptImagem', this.innerText)">${painel.promptImagem || ''}</div>
+                                <button class="btn-copiar-mini" onclick="copiarTexto(this, '${index}')">Copiar Prompt</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Atualiza campo modificado diretamente
+        function atualizarPainel(index, campo, valor) {
+            if (dadosHQ.paineis[index]) {
+                dadosHQ.paineis[index][campo] = valor;
+                autoSalvar();
+            }
+        }
+
+        // Manipulação de Ordem e Painéis
+        function moverPainel(index, direcao) {
+            const novoIndex = index + direcao;
+            if (novoIndex < 0 || novoIndex >= dadosHQ.paineis.length) return;
+
+            const temp = dadosHQ.paineis[index];
+            dadosHQ.paineis[index] = dadosHQ.paineis[novoIndex];
+            dadosHQ.paineis[novoIndex] = temp;
+
+            renderizarPaineis();
+            autoSalvar();
+        }
+
+        function excluirPainel(index) {
+            if (confirm(`Deseja realmente excluir o Quadro ${index + 1}?`)) {
+                dadosHQ.paineis.splice(index, 1);
+                renderizarPaineis();
+                autoSalvar();
+                mostrarToast("Quadro removido.");
+            }
+        }
+
+        function adicionarPainelVazio() {
+            dadosHQ.paineis.push({
+                enquadramento: "Novo Ângulo",
+                descricaoVisual: "Descreva o que acontece visualmente neste novo quadro...",
+                falas: "[Personagem]: 'Nova fala'",
+                promptImagem: "cinematic comic book panel illustration, detailed"
+            });
+            renderizarPaineis();
+            autoSalvar();
+            mostrarToast("Novo quadro adicionado!");
+        }
+
+        // Anexo de Imagens
+        function carregarImagemPainel(evento, index) {
+            const arquivo = evento.target.files[0];
+            if (arquivo) {
+                const leitor = new FileReader();
+                leitor.onload = function(e) {
+                    dadosHQ.paineis[index].imagem = e.target.result;
+                    renderizarPaineis();
+                    autoSalvar();
+                    mostrarToast("Imagem anexada ao quadro!");
+                };
+                leitor.readAsDataURL(arquivo);
+            }
+        }
+
+        function removerImagem(index) {
+            delete dadosHQ.paineis[index].imagem;
+            renderizarPaineis();
+            autoSalvar();
+        }
+
+        // Cópia e Exportações
+        function copiarTexto(botao, index) {
+            const texto = dadosHQ.paineis[index].promptImagem;
+            navigator.clipboard.writeText(texto).then(() => {
+                const anterior = botao.innerText;
+                botao.innerText = "✓ Copiado!";
+                botao.style.background = "var(--verde-sucesso)";
+                botao.style.color = "#fff";
+                setTimeout(() => {
+                    botao.innerText = anterior;
+                    botao.style.background = "";
+                    botao.style.color = "";
+                }, 2000);
+            });
+        }
+
+        function copiarTodosOsPrompts() {
+            if (!dadosHQ.paineis.length) {
+                alert("Nenhum roteiro gerado ainda!");
+                return;
+            }
+            let compilado = "";
+            dadosHQ.paineis.forEach((p, i) => {
+                compilado += `[PAINEL ${i + 1} - ${p.enquadramento}]\n${p.promptImagem}\n\n`;
+            });
+            navigator.clipboard.writeText(compilado);
+            mostrarToast("Todos os prompts foram copiados!");
+        }
+
+        function exportarRoteiroTexto() {
+            if (!dadosHQ.paineis.length) return alert("Crie uma HQ antes de exportar!");
+
+            let txt = `====================================================\n`;
+            txt += `${dadosHQ.titulo.toUpperCase()}\n`;
+            txt += `Mensagem: ${dadosHQ.licao}\n`;
+            txt += `====================================================\n\n`;
+
+            dadosHQ.paineis.forEach((p, i) => {
+                txt += `--- QUADRO ${i + 1}: ${p.enquadramento} ---\n`;
+                txt += `VISUAL: ${p.descricaoVisual}\n`;
+                txt += `FALAS: ${p.falas}\n`;
+                txt += `PROMPT IA: ${p.promptImagem}\n\n`;
+            });
+
+            baixarArquivo(txt, `${dadosHQ.titulo || 'roteiro'}.txt`, 'text/plain');
+            mostrarToast("Roteiro baixado!");
+        }
+
+        function salvarProjetoArquivo() {
+            dadosHQ.titulo = document.getElementById('resTitulo').innerText;
+            dadosHQ.licao = document.getElementById('resLicao').innerText;
+            const strJSON = JSON.stringify(dadosHQ, null, 2);
+            baixarArquivo(strJSON, `${dadosHQ.titulo || 'projeto-hq'}.json`, 'application/json');
+            mostrarToast("Projeto salvo no computador!");
+        }
+
+        function abrirProjetoArquivo(evento) {
+            const file = evento.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    dadosHQ = JSON.parse(e.target.result);
+                    renderizarPaineis();
+                    document.getElementById('resultado-area').style.display = 'block';
+                    autoSalvar();
+                    mostrarToast("Projeto aberto com sucesso!");
+                } catch (err) {
+                    alert("Arquivo de projeto inválido.");
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function novaHQ() {
+            if (confirm("Deseja iniciar uma Nova HQ? O projeto atual continuará salvo no seu navegador.")) {
+                dadosHQ = { titulo: "Novo Título", licao: "Nova Lição", paineis: [] };
+                document.getElementById('cenaTema').value = "";
+                document.getElementById('resultado-area').style.display = "none";
+                autoSalvar();
+            }
+        }
+
+        function autoSalvar() {
+            dadosHQ.titulo = document.getElementById('resTitulo').innerText;
+            dadosHQ.licao = document.getElementById('resLicao').innerText;
+            localStorage.setItem('hq_gospel_studio_dados', JSON.stringify(dadosHQ));
+            const status = document.getElementById('statusSalvo');
+            status.style.opacity = "1";
+            setTimeout(() => { status.style.opacity = "0.7"; }, 800);
+        }
+
+        function baixarArquivo(conteudo, nome, tipo) {
+            const blob = new Blob([conteudo], { type: tipo });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = nome;
+            link.click();
+        }
+
+        function mostrarToast(mensagem) {
+            const t = document.getElementById('toast');
+            t.innerText = mensagem;
+            t.style.display = 'block';
+            setTimeout(() => { t.style.display = 'none'; }, 2500);
+        }
+    </script>
+</body>
+</html>
