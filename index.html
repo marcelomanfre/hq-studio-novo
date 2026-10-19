@@ -6,22 +6,22 @@
     <title>HQ Gospel Studio - Edição Profissional</title>
     <style>
         /* ========================================================
-           DESIGN SYSTEM - HQ ÉPICA DARK MODE
+           DESIGN SYSTEM - HQ ÉPICA DARK COM DOURADO E ESTILO MANGA
            ======================================================== */
         :root {
-            --fundo-base: #0a0d13;
-            --fundo-card: #131822;
-            --fundo-card-hover: #1a2230;
-            --borda: #252e3e;
-            --borda-foco: #f59e0b;
+            --fundo-base: #090c10;
+            --fundo-card: #131924;
+            --fundo-input: #0c1017;
+            --borda: #232d3f;
             --dourado: #f59e0b;
-            --dourado-claro: #fbbf24;
+            --dourado-hover: #d97706;
             --texto-principal: #f3f4f6;
             --texto-secundario: #9ca3af;
-            --azul-destaque: #3b82f6;
-            --vermelho-alerta: #ef4444;
+            --azul-hq: #3b82f6;
             --verde-sucesso: #10b981;
-            --balao-fala: #1e293b;
+            --vermelho-onomatopeia: #ef4444;
+            --balao-fundo: #ffffff;
+            --balao-texto: #000000;
         }
 
         * {
@@ -40,25 +40,23 @@
             min-height: 100vh;
         }
 
-        .app-container {
+        .container {
             width: 100%;
-            max-width: 1050px;
+            max-width: 1100px;
         }
 
-        /* Top Bar de Ações e Cabeçalho */
         header {
             text-align: center;
             margin-bottom: 25px;
-            padding-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 1px solid var(--borda);
         }
 
         header h1 {
-            font-size: 2.3rem;
+            font-size: 2.2rem;
             color: var(--dourado);
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 4px;
         }
 
         header p {
@@ -66,87 +64,106 @@
             font-size: 0.95rem;
         }
 
-        /* Barra de Ferramentas Superior */
-        .barra-ferramentas {
+        /* Stepper - Barra de Etapas */
+        .stepper-container {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 10px;
             background: var(--fundo-card);
-            padding: 12px 18px;
-            border-radius: 10px;
+            padding: 10px;
+            border-radius: 12px;
             border: 1px solid var(--borda);
             margin-bottom: 25px;
-        }
-
-        .grupo-botoes-topo {
-            display: flex;
+            overflow-x: auto;
             gap: 8px;
-            flex-wrap: wrap;
         }
 
-        .btn-acao {
-            background: #1c2433;
-            color: var(--texto-principal);
-            border: 1px solid var(--borda);
-            padding: 8px 14px;
-            border-radius: 6px;
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
             font-size: 0.85rem;
-            font-weight: 600;
+            font-weight: bold;
+            color: var(--texto-secundario);
+            padding: 8px 12px;
+            border-radius: 8px;
+            white-space: nowrap;
             cursor: pointer;
-            transition: all 0.2s ease;
+            opacity: 0.6;
+            transition: all 0.2s;
         }
 
-        .btn-acao:hover {
-            border-color: var(--dourado);
-            color: var(--dourado);
+        .step-item.active {
+            color: #000;
+            background: var(--dourado);
+            opacity: 1;
         }
 
-        .status-salvo {
-            font-size: 0.8rem;
+        .step-item.completed {
             color: var(--verde-sucesso);
-            font-weight: 600;
+            opacity: 1;
         }
 
-        /* Painel do Roteirista */
-        .painel-config {
+        .step-numero {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* Painéis das Etapas */
+        .etapa-painel {
+            display: none;
             background: var(--fundo-card);
             border: 1px solid var(--borda);
             border-radius: 12px;
             padding: 24px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 25px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
         }
 
-        .linha-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            margin-bottom: 15px;
+        .etapa-painel.ativa {
+            display: block;
         }
 
+        .etapa-titulo {
+            color: var(--dourado);
+            font-size: 1.4rem;
+            margin-bottom: 6px;
+        }
+
+        .etapa-descricao {
+            color: var(--texto-secundario);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--borda);
+            padding-bottom: 12px;
+        }
+
+        /* Formulários e Entradas */
         .campo {
-            margin-bottom: 15px;
+            margin-bottom: 18px;
         }
 
         label {
             display: block;
             margin-bottom: 6px;
             font-weight: 600;
-            font-size: 0.9rem;
             color: var(--dourado);
+            font-size: 0.9rem;
         }
 
         input[type="text"], textarea, select {
             width: 100%;
-            padding: 11px 14px;
-            background: var(--fundo-base);
+            padding: 12px 14px;
+            background-color: var(--fundo-input);
             border: 1px solid var(--borda);
             border-radius: 8px;
             color: var(--texto-principal);
             font-size: 0.95rem;
-            transition: 0.2s border;
         }
 
         input[type="text"]:focus, textarea:focus, select:focus {
@@ -159,307 +176,227 @@
             min-height: 90px;
         }
 
-        .estilos-rapidos {
-            display: flex;
-            gap: 8px;
-            margin-top: 6px;
-            flex-wrap: wrap;
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
         }
 
-        .btn-tag {
-            background: #18202c;
+        /* Blocos Editáveis */
+        .bloco-editavel {
+            background: rgba(0,0,0,0.25);
             border: 1px solid var(--borda);
-            color: var(--texto-secundario);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-tag:hover {
-            color: var(--dourado);
-            border-color: var(--dourado);
-        }
-
-        .btn-gerar-master {
-            width: 100%;
-            padding: 15px;
-            background: var(--dourado);
-            color: #000;
-            border: none;
             border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.2s all;
-            margin-top: 10px;
-            letter-spacing: 1px;
+            padding: 14px;
+            margin-bottom: 16px;
         }
 
-        .btn-gerar-master:hover {
-            background: var(--dourado-claro);
-            transform: translateY(-2px);
+        .editavel {
+            cursor: text;
+            padding: 6px;
+            border-radius: 4px;
         }
 
-        .btn-gerar-master:disabled {
-            background: #4b5563;
-            cursor: not-allowed;
-            transform: none;
+        .editavel:focus {
+            outline: 2px solid var(--dourado);
+            background: rgba(0,0,0,0.5);
         }
 
-        .loading-box {
-            display: none;
-            text-align: center;
-            font-size: 1.1rem;
-            color: var(--dourado);
-            margin: 20px 0;
+        /* Ficha Técnica de Personagens */
+        .dna-card {
+            background: #18202c;
+            border: 1px solid #283548;
+            border-left: 4px solid var(--dourado);
+            padding: 14px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .dna-nome {
             font-weight: bold;
-        }
-
-        /* Área da HQ Gerada */
-        #resultado-area {
-            display: none;
-        }
-
-        .cabecalho-hq {
-            background: var(--fundo-card);
-            border: 1px solid var(--borda);
-            border-radius: 12px;
-            padding: 22px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .titulo-hq {
-            font-size: 1.8rem;
             color: var(--dourado);
-            margin-bottom: 6px;
-            font-weight: 800;
-        }
-
-        .licao-hq {
-            color: #93c5fd;
-            font-style: italic;
             font-size: 1rem;
+            margin-bottom: 4px;
         }
 
-        /* Lista de Painéis */
-        .painel-card {
-            background: var(--fundo-card);
-            border: 2px solid var(--borda);
-            border-radius: 12px;
-            padding: 22px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-            transition: border-color 0.2s;
-        }
-
-        .painel-card:hover {
-            border-color: #3b465c;
-        }
-
-        .painel-topo {
+        /* Botões de Ação */
+        .barra-navegacao-etapa {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--borda);
-            padding-bottom: 12px;
-            margin-bottom: 16px;
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid var(--borda);
             flex-wrap: wrap;
             gap: 10px;
         }
 
-        .painel-badge {
-            background: var(--azul-destaque);
-            color: #fff;
-            padding: 5px 12px;
+        .btn-voltar {
+            background: #1c2433;
+            color: var(--texto-principal);
+            border: 1px solid var(--borda);
+            padding: 10px 18px;
             border-radius: 6px;
             font-weight: bold;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-        }
-
-        .painel-controles {
-            display: flex;
-            gap: 6px;
-        }
-
-        .btn-mini {
-            background: #1e2636;
-            color: var(--texto-secundario);
-            border: 1px solid var(--borda);
-            padding: 4px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
             cursor: pointer;
-            font-weight: bold;
         }
 
-        .btn-mini:hover {
-            color: var(--texto-principal);
-            border-color: var(--dourado);
-        }
-
-        .btn-mini.danger:hover {
-            color: #fff;
-            background: var(--vermelho-alerta);
-            border-color: var(--vermelho-alerta);
-        }
-
-        /* Layout Interno do Painel */
-        .painel-corpo {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-        }
-
-        @media (min-width: 768px) {
-            .painel-corpo.com-preview {
-                grid-template-columns: 240px 1fr;
-            }
-        }
-
-        /* Área de Upload e Preview da Imagem */
-        .upload-area {
-            background: #0d1117;
-            border: 2px dashed var(--borda);
-            border-radius: 8px;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-            text-align: center;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-            transition: 0.2s border;
-        }
-
-        .upload-area:hover {
-            border-color: var(--dourado);
-        }
-
-        .upload-area img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
-        .upload-label {
-            font-size: 0.8rem;
-            color: var(--texto-secundario);
-            pointer-events: none;
-        }
-
-        .btn-remover-img {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(0,0,0,0.7);
+        .btn-aprovar {
+            background: var(--verde-sucesso);
             color: #fff;
             border: none;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            cursor: pointer;
-            display: none;
-        }
-
-        /* Campos Editáveis */
-        .secao-titulo {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--dourado);
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .editavel {
-            padding: 10px;
-            background: rgba(0,0,0,0.3);
+            padding: 12px 24px;
             border-radius: 6px;
-            border: 1px solid transparent;
-            min-height: 40px;
-            margin-bottom: 12px;
-            cursor: text;
-        }
-
-        .editavel:focus {
-            outline: none;
-            border-color: var(--dourado);
-            background: rgba(0,0,0,0.5);
-        }
-
-        .bloco-falas {
-            background: var(--balao-fala);
-            border-left: 4px solid var(--azul-destaque);
-            color: #e2e8f0;
-        }
-
-        /* Prompt e Cópia */
-        .caixa-prompt {
-            display: flex;
-            gap: 8px;
-            background: #090c10;
-            border: 1px solid #1f2733;
-            padding: 10px;
-            border-radius: 6px;
-            align-items: flex-start;
-        }
-
-        .texto-prompt {
-            flex: 1;
-            font-family: monospace;
-            font-size: 0.85rem;
-            color: #a7f3d0;
-            word-break: break-word;
-        }
-
-        .btn-copiar-mini {
-            background: #212a38;
-            color: var(--texto-principal);
-            border: 1px solid var(--borda);
-            padding: 6px 10px;
-            border-radius: 5px;
-            font-size: 0.75rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            white-space: nowrap;
+            transition: 0.2s;
         }
 
-        .btn-copiar-mini:hover {
+        .btn-aprovar:hover {
+            filter: brightness(1.15);
+        }
+
+        .btn-gerar-ia {
             background: var(--dourado);
             color: #000;
-        }
-
-        /* Adicionar Novo Painel */
-        .btn-adicionar-painel {
-            width: 100%;
-            padding: 14px;
-            background: #182232;
-            border: 2px dashed var(--borda);
-            color: var(--texto-secundario);
+            border: none;
+            padding: 12px 22px;
+            border-radius: 6px;
             font-weight: bold;
-            border-radius: 10px;
             cursor: pointer;
-            margin-bottom: 25px;
-            transition: all 0.2s;
+            margin-bottom: 15px;
         }
 
-        .btn-adicionar-painel:hover {
-            border-color: var(--dourado);
+        /* Quadros de Produção */
+        .quadro-producao {
+            background: #141b24;
+            border: 2px solid var(--borda);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+        }
+
+        .caixa-imagem-baloes {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .caixa-imagem-baloes img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Balões de Fala e Onomatopeias Visuais */
+        .balao-hq-overlay {
+            position: absolute;
+            background: var(--balao-fundo);
+            color: var(--balao-texto);
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            max-width: 65%;
+            border: 2px solid #000;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.8);
+            cursor: move;
+        }
+
+        .recordatorio-overlay {
+            position: absolute;
+            background: #fef08a;
+            color: #000;
+            padding: 6px 12px;
+            border: 2px solid #000;
+            font-family: Georgia, serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            top: 10px;
+            left: 10px;
+            max-width: 80%;
+        }
+
+        .sfx-overlay {
+            position: absolute;
+            color: #facc15;
+            font-size: 1.8rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 3px 3px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
+            letter-spacing: 2px;
+            transform: rotate(-10deg);
+            cursor: move;
+            top: 15px;
+            right: 20px;
+            user-select: none;
+        }
+
+        /* Revista Digital (Leitor Híbrido) */
+        .barra-leitor-controles {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--fundo-card);
+            padding: 12px 18px;
+            border-radius: 8px;
+            border: 1px solid var(--borda);
+        }
+
+        .revista-leitor {
+            padding: 25px;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+            background: #000;
+        }
+
+        /* Estilo Webtoon (Celular - Rolagem Fluida) */
+        .revista-leitor.modo-webtoon {
+            gap: 0px !important;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0px;
+        }
+
+        .revista-leitor.modo-webtoon .pagina-revista {
+            border: none;
+            margin-bottom: 0px;
+            box-shadow: none;
+        }
+
+        .pagina-revista {
+            width: 100%;
+            max-width: 780px;
+            background: #fff;
+            border: 8px solid #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+            color: #000;
+            position: relative;
+        }
+
+        .pagina-revista img {
+            width: 100%;
+            display: block;
+        }
+
+        .loading {
+            display: none;
             color: var(--dourado);
+            font-weight: bold;
+            margin: 10px 0;
         }
 
-        /* Notificação Toast */
         .toast {
             position: fixed;
             bottom: 25px;
@@ -474,50 +411,67 @@
             z-index: 1000;
         }
 
-        /* Impressão Limpa */
         @media print {
             body { background: #fff !important; color: #000 !important; padding: 0 !important; }
-            .painel-config, .barra-ferramentas, .painel-controles, .btn-copiar-mini, .btn-adicionar-painel, header { display: none !important; }
-            .painel-card { border: 1px solid #000 !important; page-break-inside: avoid; background: #fff !important; color: #000 !important; }
-            .editavel, .bloco-falas, .caixa-prompt { background: none !important; color: #000 !important; border: none !important; }
-            .texto-prompt { color: #555 !important; }
+            header, .stepper-container, .barra-navegacao-etapa, .btn-gerar-ia, .barra-leitor-controles { display: none !important; }
+            .etapa-painel { border: none !important; box-shadow: none !important; background: transparent !important; }
+            .pagina-revista { page-break-after: always; border: none; box-shadow: none; width: 100%; max-width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <!-- Cabeçalho -->
+    <div class="container">
         <header>
             <h1>HQ Gospel Studio</h1>
-            <p>Plataforma de Roteirização, Criação e Edição de Quadrinhos Bíblicos</p>
+            <p>Plataforma Profissional de Quadrinhos e Mangás Bíblicos</p>
         </header>
 
-        <!-- Barra de Ferramentas / Backup / Exportação -->
-        <div class="barra-ferramentas">
-            <div class="grupo-botoes-topo">
-                <button class="btn-acao" onclick="novaHQ()">📄 Nova HQ</button>
-                <button class="btn-acao" onclick="salvarProjetoArquivo()">💾 Baixar Projeto (.json)</button>
-                <button class="btn-acao" onclick="document.getElementById('importarInput').click()">📂 Abrir Projeto</button>
-                <input type="file" id="importarInput" style="display:none;" accept=".json" onchange="abrirProjetoArquivo(event)">
+        <!-- Stepper (Esteira de Produção) -->
+        <div class="stepper-container">
+            <div class="step-item active" id="step-nav-1" onclick="irParaEtapa(1)">
+                <span class="step-numero">1</span> Formato & DNA
             </div>
-            <div class="grupo-botoes-topo">
-                <button class="btn-acao" onclick="copiarTodosOsPrompts()">📋 Copiar Todos Prompts</button>
-                <button class="btn-acao" onclick="exportarRoteiroTexto()">📝 Baixar Roteiro (.txt)</button>
-                <button class="btn-acao" onclick="window.print()">🖨️ Imprimir / PDF</button>
+            <div class="step-item" id="step-nav-2" onclick="irParaEtapa(2)">
+                <span class="step-numero">2</span> Falas & SFX
             </div>
-            <span class="status-salvo" id="statusSalvo">● Auto-salvo no navegador</span>
+            <div class="step-item" id="step-nav-3" onclick="irParaEtapa(3)">
+                <span class="step-numero">3</span> Prompts com Trava
+            </div>
+            <div class="step-item" id="step-nav-4" onclick="irParaEtapa(4)">
+                <span class="step-numero">4</span> Montagem Quadros
+            </div>
+            <div class="step-item" id="step-nav-5" onclick="irParaEtapa(5)">
+                <span class="step-numero">5</span> Edição de Balões
+            </div>
+            <div class="step-item" id="step-nav-6" onclick="irParaEtapa(6)">
+                <span class="step-numero">6</span> Revista Digital
+            </div>
         </div>
 
-        <!-- Painel de Criação e Parâmetros -->
-        <div class="painel-config">
+        <!-- ========================================================
+             1ª ETAPA: FORMATO DE PUBLICAÇÃO, ROTEIRO & DNA VISUAL
+             ======================================================== -->
+        <div class="etapa-painel ativa" id="etapa-1">
+            <h2 class="etapa-titulo">1ª Etapa: Formato de Publicação, Roteiro & DNA Visual</h2>
+            <p class="etapa-descricao">Selecione o formato de leitura da juventude e defina a cena para gerar a sinopse e a ficha fisionômica invariável dos personagens.</p>
+
             <div class="campo">
-                <label for="cenaTema">Passagem Bíblica / Tema Central:</label>
-                <input type="text" id="cenaTema" placeholder="Ex: O Pentecostes e a descida do Espírito Santo em atos 2">
+                <label for="formatoPublicacao">Formato da Publicação:</label>
+                <select id="formatoPublicacao" onchange="atualizarConfiguracaoFormato()">
+                    <option value="webtoon">📱 Webtoon Vertical (Rolagem contínua para celular - Padrão Gen Z)</option>
+                    <option value="graphic-novel" selected>📖 Graphic Novel / Mangá (Páginas clássicas cinematográficas)</option>
+                    <option value="carrossel">📸 Carrossel de Redes Sociais (4 a 8 telas quadradas para Instagram/TikTok)</option>
+                </select>
             </div>
 
-            <div class="linha-grid">
-                <div>
+            <div class="campo">
+                <label for="temaInput">Passagem Bíblica / Tema da Cena:</label>
+                <input type="text" id="temaInput" placeholder="Ex: A ressurreição de Lázaro com foco na emoção e poder de Cristo">
+            </div>
+
+            <div class="grid-3">
+                <div class="campo">
                     <label for="faixaEtaria">Público-Alvo:</label>
                     <select id="faixaEtaria">
                         <option value="Adolescentes (13 a 17 anos)">Adolescentes (13 a 17 anos)</option>
@@ -526,406 +480,567 @@
                     </select>
                 </div>
 
-                <div>
-                    <label for="tomNarrativo">Tom Narrativo:</label>
-                    <select id="tomNarrativo">
-                        <option value="Ação Épica e Dinâmica">Ação Épica e Dinâmica</option>
-                        <option value="Emocionante e Profundo">Emocionante e Profundo</option>
-                        <option value="Reflexivo e Inspirador">Reflexivo e Inspirador</option>
-                        <option value="Urbano e Contemporâneo">Urbano e Contemporâneo</option>
+                <div class="campo">
+                    <label for="estiloVisual">Estilo Artístico:</label>
+                    <select id="estiloVisual">
+                        <option value="Manga Shonen vibrante com linhas de ação e alto dinamismo emocional">🥋 Mangá Shonen Dinâmico</option>
+                        <option value="Webtoon digital moderno com iluminação cinematográfica e cores quentes">📱 Webtoon Moderno</option>
+                        <option value="Graphic Novel clássica épica ao estilo Marvel/DC com realismo solene">🏛️ Graphic Novel Clássica</option>
                     </select>
                 </div>
 
-                <div>
-                    <label for="qtdPaineis">Quantidade de Painéis:</label>
+                <div class="campo">
+                    <label for="qtdPaineis">Quantidade de Quadros:</label>
                     <select id="qtdPaineis">
-                        <option value="4">4 Painéis (Rápido / Redes Sociais)</option>
-                        <option value="6" selected>6 Painéis (Cena Completa)</option>
-                        <option value="8">8 Painéis (Capítulo Detalhado)</option>
+                        <option value="4">4 Quadros (Impacto Rápido)</option>
+                        <option value="6" selected>6 Quadros (Cena Completa Padrão)</option>
+                        <option value="8">8 Quadros (Capítulo Detalhado)</option>
                     </select>
                 </div>
             </div>
 
             <div class="campo">
-                <label>Estilos Visuais Rápidos:</label>
-                <div class="estilos-rapidos">
-                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Mangá Shonen japonês, cenas de alta energia e traços expressivos.')">🥋 Mangá Shonen</button>
-                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Webtoon digital com iluminação vibrante e foco em emoções juvenis.')">📱 Webtoon Moderno</button>
-                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Graphic Novel Clássica ocidental com pintura cinematográfica e realismo épico.')">🏛️ Graphic Novel Clássica</button>
-                    <button class="btn-tag" type="button" onclick="adicionarEstilo('Estilo Arte Minimalista e Expressiva com contrastes marcantes de sombra e luz.')">🎨 Minimalista / Contraste</button>
+                <label for="diretrizesInput">Diretrizes Teológicas & Técnicas:</label>
+                <textarea id="diretrizesInput" placeholder="Ex: Baseado em João 11; Focar no contraste entre a dor das irmãs e a autoridade compassiva de Jesus; Linguagem jovem e direta."></textarea>
+            </div>
+
+            <button class="btn-gerar-ia" onclick="gerarEtapa1()">⚡ Gerar Roteiro e Ficha de Personagens</button>
+            <div class="loading" id="load-1">✍️ Criando roteiro e travas de consistência visual com Gemini 3.8...</div>
+
+            <!-- Área de Revisão -->
+            <div id="revisao-etapa-1" style="display:none; margin-top:20px;">
+                <div class="bloco-editavel">
+                    <label>Título da História:</label>
+                    <h3 class="editavel" id="resTitulo" contenteditable="true" onblur="salvarEstado()">Título</h3>
+                    <label style="margin-top:10px;">Sinopse & Mensagem Espiritual:</label>
+                    <div class="editavel" id="resSinopse" contenteditable="true" onblur="salvarEstado()">Sinopse</div>
+                </div>
+
+                <label>Ficha Técnica de Consistência (DNA Visual Invariável):</label>
+                <div id="listaPersonagens"></div>
+
+                <div class="barra-navegacao-etapa">
+                    <span></span>
+                    <button class="btn-aprovar" onclick="aprovarEtapa(1, 2)">✓ Aprovar Roteiro e Avançar para Falas & SFX</button>
                 </div>
             </div>
-
-            <div class="campo">
-                <label for="referencias">Suas Diretrizes Teológicas e Técnicas:</label>
-                <textarea id="referencias" placeholder="Ex: Manter rigor com o livro de Atos; Enfatizar a diversidade de povos e o fogo como presença acolhedora e poderosa; Linguagem empolgante."></textarea>
-            </div>
-
-            <button class="btn-gerar-master" id="btnGerar" onclick="gerarHQComIA()">⚡ Gerar Roteiro e Painéis da HQ</button>
-            <div class="loading-box" id="loadingTexto">✍️ O Gemini 3.8 Flash está estruturando a cena, as falas e os prompts visuais...</div>
         </div>
 
-        <!-- Área dos Quadrinhos -->
-        <div id="resultado-area">
-            <div class="cabecalho-hq">
-                <div class="secao-titulo">Título da História (Clique para Editar):</div>
-                <div class="titulo-hq editavel" id="resTitulo" contenteditable="true" oninput="autoSalvar()">Título da HQ</div>
-                <div class="secao-titulo" style="margin-top:10px;">Mensagem Central:</div>
-                <div class="licao-hq editavel" id="resLicao" contenteditable="true" oninput="autoSalvar()">Mensagem Espiritual</div>
+        <!-- ========================================================
+             2ª ETAPA: FALAS, NARRAÇÃO & ONOMATOPEIAS (SFX)
+             ======================================================== -->
+        <div class="etapa-painel" id="etapa-2">
+            <h2 class="etapa-titulo">2ª Etapa: Falas, Narração & Onomatopeias Visuais (SFX)</h2>
+            <p class="etapa-descricao">Revise os diálogos e os efeitos sonoros desenhados na tela para garantir o ritmo e a emoção dos quadrinhos jovens.</p>
+
+            <button class="btn-gerar-ia" onclick="gerarEtapa2()">⚡ Roteirizar Diálogos e Onomatopeias com IA</button>
+            <div class="loading" id="load-2">✍️ Escrevendo balões de fala, pensamentos e efeitos sonoros...</div>
+
+            <div id="listaFalas"></div>
+
+            <div class="barra-navegacao-etapa">
+                <button class="btn-voltar" onclick="irParaEtapa(1)">← Voltar ao Roteiro</button>
+                <button class="btn-aprovar" onclick="aprovarEtapa(2, 3)">✓ Aprovar Falas e Avançar para Prompts</button>
+            </div>
+        </div>
+
+        <!-- ========================================================
+             3ª ETAPA: PROMPTS COM TRAVA & ASPECT RATIO
+             ======================================================== -->
+        <div class="etapa-painel" id="etapa-3">
+            <h2 class="etapa-titulo">3ª Etapa: Prompts com Trava de Consistência & Proporção</h2>
+            <p class="etapa-descricao">Cada comando de imagem gerado aqui já inclui automaticamente o DNA fisionômico dos personagens e as tags de formato (--ar) para Midjourney e Leonardo AI.</p>
+
+            <button class="btn-gerar-ia" onclick="gerarEtapa3()">⚡ Gerar Prompts com Trava de Consistência</button>
+            <div class="loading" id="load-3">✍️ Integrando fichas técnicas e parâmetros visuais...</div>
+
+            <div id="listaPrompts"></div>
+
+            <div class="barra-navegacao-etapa">
+                <button class="btn-voltar" onclick="irParaEtapa(2)">← Voltar às Falas</button>
+                <button class="btn-aprovar" onclick="aprovarEtapa(3, 4)">✓ Aprovar Prompts e Montar Quadros</button>
+            </div>
+        </div>
+
+        <!-- ========================================================
+             4ª ETAPA: MONTAGEM DOS QUADROS (UPLOAD DAS ARTES)
+             ======================================================== -->
+        <div class="etapa-painel" id="etapa-4">
+            <h2 class="etapa-titulo">4ª Etapa: Montagem dos Quadros (Artes do Google Drive)</h2>
+            <p class="etapa-descricao">Arraste as imagens finais que você gerou e salvou no seu Google Drive para cada respectivo quadro da história.</p>
+
+            <div id="listaUploads"></div>
+
+            <div class="barra-navegacao-etapa">
+                <button class="btn-voltar" onclick="irParaEtapa(3)">← Voltar aos Prompts</button>
+                <button class="btn-aprovar" onclick="aprovarEtapa(4, 5)">✓ Aprovar Montagem e Ir para Balões</button>
+            </div>
+        </div>
+
+        <!-- ========================================================
+             5ª ETAPA: EDIÇÃO DE BALÕES & ONOMATOPEIAS VISUAIS
+             ======================================================== -->
+        <div class="etapa-painel" id="etapa-5">
+            <h2 class="etapa-titulo">5ª Etapa: Inclusão e Edição dos Balões & Onomatopeias</h2>
+            <p class="etapa-descricao">Veja as falas, recordatórios e efeitos sonoros sobrepostos à ilustração. Edite os textos livremente na própria cena.</p>
+
+            <div id="listaBaloesEdicao"></div>
+
+            <div class="barra-navegacao-etapa">
+                <button class="btn-voltar" onclick="irParaEtapa(4)">← Voltar à Montagem</button>
+                <button class="btn-aprovar" onclick="aprovarEtapa(5, 6)">✓ Aprovar Revista e Finalizar Capítulo</button>
+            </div>
+        </div>
+
+        <!-- ========================================================
+             ETAPA FINAL: REVISTA DIGITAL HÍBRIDA
+             ======================================================== -->
+        <div class="etapa-painel" id="etapa-6">
+            <h2 class="etapa-titulo">Etapa Final: Leitor de Revista Digital Híbrida</h2>
+            <p class="etapa-descricao">O capítulo está finalizado para leitura contínua no celular ou computador.</p>
+
+            <div class="barra-leitor-controles">
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-voltar" id="btnModoWebtoon" onclick="alternarModoLeitor('webtoon')">📱 Modo Webtoon (Rolagem Celular)</button>
+                    <button class="btn-voltar" id="btnModoRevista" onclick="alternarModoLeitor('revista')">📖 Modo Revista / Álbum</button>
+                </div>
+                <button class="btn-gerar-ia" style="margin:0;" onclick="window.print()">🖨️ Imprimir / Salvar em PDF</button>
             </div>
 
-            <!-- Lista Dinâmica de Painéis -->
-            <div id="listaPaineis"></div>
+            <div class="revista-leitor" id="revistaConteudo"></div>
 
-            <button class="btn-adicionar-painel" onclick="adicionarPainelVazio()">➕ Adicionar Mais Um Painel</button>
+            <div class="barra-navegacao-etapa">
+                <button class="btn-voltar" onclick="irParaEtapa(5)">← Voltar à Edição de Balões</button>
+                <button class="btn-aprovar" onclick="salvarCapituloFinal()">💾 Baixar Capítulo Pronto (.json)</button>
+            </div>
         </div>
     </div>
 
-    <!-- Mensagem Flutuante (Toast) -->
     <div class="toast" id="toast">Aviso do Sistema</div>
 
     <!-- ========================================================
-         SCRIPT: LÓGICA DO ESTÚDIO COM AUTO-SAVE E GEMINI 3.8
+         SCRIPT: LÓGICA DE PRODUÇÃO, TRAVAS E GEMINI 3.8 FLASH
          ======================================================== -->
     <script>
-        const CHAVE_API = "AQ.Ab8RN6KIK5ROBX1ZvuX2sHxKlNYO8BDg6JT28yoXjhMrTyeLZw";
+        const CHAVE_GEMINI = "AQ.Ab8RN6KIK5ROBX1ZvuX2sHxKlNYO8BDg6JT28yoXjhMrTyeLZw";
 
-        // Estrutura que guarda a história ativa
-        let dadosHQ = {
-            titulo: "Título da História",
-            licao: "Lição para os jovens",
-            paineis: []
+        let projetoHQ = {
+            etapaAtual: 1,
+            formato: "graphic-novel",
+            titulo: "",
+            sinopse: "",
+            estilo: "",
+            personagens: [], 
+            quadros: [] // { numero, enquadramento, descricao, narrador, falas, onomatopeia, prompt, imagem }
         };
 
-        // Ao abrir a página: verifica se tem dados salvos na memória
         window.addEventListener('DOMContentLoaded', () => {
-            const salvo = localStorage.getItem('hq_gospel_studio_dados');
+            const salvo = localStorage.getItem('hq_gospel_studio_v2');
             if (salvo) {
                 try {
-                    dadosHQ = JSON.parse(salvo);
-                    if (dadosHQ.paineis && dadosHQ.paineis.length > 0) {
-                        renderizarPaineis();
-                        document.getElementById('resultado-area').style.display = 'block';
-                    }
-                } catch (e) {
-                    console.error("Erro ao carregar auto-save:", e);
-                }
+                    projetoHQ = JSON.parse(salvo);
+                    restaurarInterface();
+                } catch(e) { console.error("Erro no carregamento:", e); }
             }
         });
 
-        function adicionarEstilo(texto) {
-            const campo = document.getElementById('referencias');
-            campo.value = campo.value ? campo.value + " | " + texto : texto;
-            mostrarToast("Estilo adicionado!");
+        function salvarEstado() {
+            localStorage.setItem('hq_gospel_studio_v2', JSON.stringify(projetoHQ));
         }
 
-        async function gerarHQComIA() {
-            const tema = document.getElementById('cenaTema').value.trim();
-            const referencias = document.getElementById('referencias').value.trim();
-            const faixaEtaria = document.getElementById('faixaEtaria').value;
-            const tomNarrativo = document.getElementById('tomNarrativo').value;
-            const qtdPaineis = document.getElementById('qtdPaineis').value;
+        function irParaEtapa(numero) {
+            document.querySelectorAll('.etapa-painel').forEach(p => p.classList.remove('ativa'));
+            document.querySelectorAll('.step-item').forEach(s => s.classList.remove('active'));
 
-            const btn = document.getElementById('btnGerar');
-            const loading = document.getElementById('loadingTexto');
-            const resultadoArea = document.getElementById('resultado-area');
+            document.getElementById(`etapa-${numero}`).classList.add('ativa');
+            document.getElementById(`step-nav-${numero}`).classList.add('active');
 
-            if (!tema) {
-                alert("Por favor, digite o tema ou a passagem bíblica!");
-                return;
-            }
+            projetoHQ.etapaAtual = numero;
+            salvarEstado();
 
-            btn.disabled = true;
-            loading.style.display = "block";
+            if (numero === 4) renderizarEtapa4();
+            if (numero === 5) renderizarEtapa5();
+            if (numero === 6) renderizarEtapa6();
+        }
 
-            // Prompt otimizado para retorno estrito em formato de dados
-            const promptMestre = `
-Você é um Roteirista Master de Histórias em Quadrinhos e especialista bíblico para jovens.
-Crie um roteiro sequencial completo para a seguinte produção:
+        function aprovarEtapa(atual, proxima) {
+            document.getElementById(`step-nav-${atual}`).classList.add('completed');
+            mostrarToast(`Etapa ${atual} aprovada com sucesso!`);
+            irParaEtapa(proxima);
+        }
 
-- TEMA/PASSAGEM: ${tema}
-- PÚBLICO-ALVO: ${faixaEtaria}
-- TOM NARRATIVO: ${tomNarrativo}
-- QUANTIDADE DE PAINÉIS: Exatamente ${qtdPaineis} painéis.
-- DIRETRIZES TÉCNICAS E TEOLÓGICAS: ${referencias || "Fidelidade bíblica com alta energia e relevância contemporânea."}
+        function atualizarConfiguracaoFormato() {
+            projetoHQ.formato = document.getElementById('formatoPublicacao').value;
+            salvarEstado();
+        }
 
-RESPONDA EXCLUSIVAMENTE COM UM JSON VÁLIDO (sem qualquer texto ou formatação fora do JSON).
-Siga estritamente este molde:
+        // =========================================================================
+        // 1ª ETAPA: ROTEIRO & PERSONAGENS (DNA VISUAL)
+        // =========================================================================
+        async function gerarEtapa1() {
+            const tema = document.getElementById('temaInput').value.trim();
+            const faixa = document.getElementById('faixaEtaria').value;
+            const estilo = document.getElementById('estiloVisual').value;
+            const qtd = document.getElementById('qtdPaineis').value;
+            const dir = document.getElementById('diretrizesInput').value.trim();
+            projetoHQ.formato = document.getElementById('formatoPublicacao').value;
+            projetoHQ.estilo = estilo;
+
+            if (!tema) return alert("Por favor, digite o tema ou a passagem bíblica!");
+
+            document.getElementById('load-1').style.display = "block";
+
+            const prompt = `
+Você é um Roteirista Master de HQs e comunicador bíblico para a juventude.
+Crie a Sinopse Geral e a FICHA TÉCNICA DE CONSISTÊNCIA VISUAL DOS PERSONAGENS (Character Sheet) para:
+- TEMA: ${tema}
+- FORMATO: ${projetoHQ.formato}
+- PÚBLICO: ${faixa}
+- ESTILO: ${estilo}
+- TOTAL DE QUADROS: Exatamente ${qtd} quadros.
+- DIRETRIZES: ${dir || "Fidelidade bíblica com alta intensidade dramática para jovens."}
+
+Para cada personagem, detalhe minuciosamente sua aparência física constante e roupas características para travar a IA de imagem.
+
+RESPONDA EXCLUSIVAMENTE COM UM JSON VÁLIDO NESTE FORMATO:
 {
-  "titulo": "Título impactante",
-  "licao": "Lição transformadora para o jovem",
-  "paineis": [
+  "titulo": "Título da História",
+  "sinopse": "Sinopse e lição central",
+  "personagens": [
     {
-      "enquadramento": "Plano Médio / Close Dramático / etc",
-      "descricaoVisual": "Descrição detalhada do cenário, pose e emoção",
-      "falas": "[Nome Personagem]: 'Fala impactante' ou [Narrador]: 'Texto'",
-      "promptImagem": "cinematic comic book panel illustration, dramatic lighting, detailed, in english"
+      "nome": "Nome do Personagem",
+      "dnaVisual": "Ex: Homem de 30 anos, traços do oriente médio, barba escura aparada, olhar compassivo e marcante, pele morena",
+      "roupasFixas": "Ex: Túnica cor linho cru com manto índigo desgastado nas bordas"
+    }
+  ],
+  "qtdQuadros": ${qtd}
+}
+`;
+            try {
+                const res = await chamarGemini(prompt);
+                projetoHQ.titulo = res.titulo;
+                projetoHQ.sinopse = res.sinopse;
+                projetoHQ.personagens = res.personagens;
+
+                projetoHQ.quadros = [];
+                for (let i = 1; i <= res.qtdQuadros; i++) {
+                    projetoHQ.quadros.push({
+                        numero: i,
+                        enquadramento: `Quadro ${i}`,
+                        descricao: '',
+                        narrador: '',
+                        falas: '',
+                        onomatopeia: '',
+                        prompt: '',
+                        imagem: null
+                    });
+                }
+
+                document.getElementById('resTitulo').innerText = projetoHQ.titulo;
+                document.getElementById('resSinopse').innerText = projetoHQ.sinopse;
+
+                renderizarPersonagens();
+                document.getElementById('revisao-etapa-1').style.display = "block";
+                salvarEstado();
+            } catch (e) {
+                alert("Erro ao roteirizar a cena. Tente novamente.");
+            } finally {
+                document.getElementById('load-1').style.display = "none";
+            }
+        }
+
+        function renderizarPersonagens() {
+            const container = document.getElementById('listaPersonagens');
+            container.innerHTML = "";
+            projetoHQ.personagens.forEach((p, i) => {
+                const card = document.createElement('div');
+                card.className = "dna-card";
+                card.innerHTML = `
+                    <div class="dna-nome editavel" contenteditable="true" onblur="projetoHQ.personagens[${i}].nome=this.innerText; salvarEstado();">${p.nome}</div>
+                    <div style="font-size:0.85rem; color:#93c5fd; margin-bottom:4px;"><b>DNA Físico:</b> <span class="editavel" contenteditable="true" onblur="projetoHQ.personagens[${i}].dnaVisual=this.innerText; salvarEstado();">${p.dnaVisual}</span></div>
+                    <div style="font-size:0.85rem; color:#fde68a;"><b>Traje Fixo:</b> <span class="editavel" contenteditable="true" onblur="projetoHQ.personagens[${i}].roupasFixas=this.innerText; salvarEstado();">${p.roupasFixas}</span></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // =========================================================================
+        // 2ª ETAPA: FALAS, NARRAÇÃO & ONOMATOPEIAS (SFX)
+        // =========================================================================
+        async function gerarEtapa2() {
+            document.getElementById('load-2').style.display = "block";
+
+            const prompt = `
+Com base no roteiro "${projetoHQ.titulo}" e nos personagens: ${JSON.stringify(projetoHQ.personagens)},
+Crie as Falas, Textos de Narração e ONOMATOPEIAS VISUAIS (Efeitos Sonoros como KRA-KOOM, SHHHH, WHAM, etc.) para os ${projetoHQ.quadros.length} quadros.
+
+RESPONDA EXCLUSIVAMENTE COM JSON:
+{
+  "quadros": [
+    {
+      "numero": 1,
+      "enquadramento": "Plano Aberto / Close-up / etc",
+      "descricao": "Ação visual do quadro",
+      "narrador": "Texto de recordatório ou vazio",
+      "falas": "[Personagem]: 'Fala impactante'",
+      "onomatopeia": "SFX sonoro de impacto ou vazio"
     }
   ]
 }
 `;
-
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${CHAVE_API}`;
-
-                const resposta = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        contents: [{ parts: [{ text: promptMestre }] }]
-                    })
+                const res = await chamarGemini(prompt);
+                res.quadros.forEach((q, i) => {
+                    if (projetoHQ.quadros[i]) {
+                        projetoHQ.quadros[i].enquadramento = q.enquadramento;
+                        projetoHQ.quadros[i].descricao = q.descricao;
+                        projetoHQ.quadros[i].narrador = q.narrador || "";
+                        projetoHQ.quadros[i].falas = q.falas || "";
+                        projetoHQ.quadros[i].onomatopeia = q.onomatopeia || "";
+                    }
                 });
-
-                const dados = await resposta.json();
-
-                if (dados.candidates && dados.candidates[0].content.parts[0].text) {
-                    let textoPuro = dados.candidates[0].content.parts[0].text;
-                    // Limpa formatação Markdown
-                    textoPuro = textoPuro.replace(/```json/gi, '').replace(/```/gi, '').trim();
-
-                    dadosHQ = JSON.parse(textoPuro);
-                    renderizarPaineis();
-                    autoSalvar();
-
-                    resultadoArea.style.display = "block";
-                    mostrarToast("HQ Gerada com Sucesso!");
-                    resultadoArea.scrollIntoView({ behavior: 'smooth' });
-                } else {
-                    alert("Erro retornado pelo Gemini: " + (dados.error ? dados.error.message : "Resposta em formato inesperado."));
-                }
-            } catch (erro) {
-                console.error("Erro na geração:", erro);
-                alert("Falha de conexão com a IA. Tente clicar novamente.");
+                renderizarEtapa2();
+                salvarEstado();
+            } catch (e) {
+                alert("Erro ao criar diálogos. Tente novamente.");
             } finally {
-                btn.disabled = false;
-                loading.style.display = "none";
+                document.getElementById('load-2').style.display = "none";
             }
         }
 
-        // Renderiza todos os cartões na tela
-        function renderizarPaineis() {
-            document.getElementById('resTitulo').innerText = dadosHQ.titulo || "Título da História";
-            document.getElementById('resLicao').innerText = dadosHQ.licao || "Mensagem Central";
-
-            const container = document.getElementById('listaPaineis');
+        function renderizarEtapa2() {
+            const container = document.getElementById('listaFalas');
             container.innerHTML = "";
-
-            dadosHQ.paineis.forEach((painel, index) => {
+            projetoHQ.quadros.forEach((q, i) => {
                 const card = document.createElement('div');
-                card.className = "painel-card";
-                card.id = `card-painel-${index}`;
-
+                card.className = "bloco-editavel";
                 card.innerHTML = `
-                    <div class="painel-topo">
-                        <span class="painel-badge">Quadro ${index + 1} • <span class="editavel-mini" contenteditable="true" onblur="atualizarPainel(${index}, 'enquadramento', this.innerText)">${painel.enquadramento || 'Cena'}</span></span>
-                        
-                        <div class="painel-controles">
-                            <button class="btn-mini" onclick="moverPainel(${index}, -1)" title="Mover para Cima">▲</button>
-                            <button class="btn-mini" onclick="moverPainel(${index}, 1)" title="Mover para Baixo">▼</button>
-                            <button class="btn-mini danger" onclick="excluirPainel(${index})" title="Excluir Painel">🗑️ Excluir</button>
-                        </div>
+                    <h4 style="color:var(--dourado); margin-bottom:8px;">Quadro ${q.numero} (${q.enquadramento})</h4>
+                    <label>Ação Visual da Cena:</label>
+                    <div class="editavel" contenteditable="true" onblur="projetoHQ.quadros[${i}].descricao=this.innerText; salvarEstado();">${q.descricao}</div>
+                    
+                    <label style="margin-top:10px;">Texto do Narrador (Recordatório):</label>
+                    <div class="editavel" contenteditable="true" style="background:#202938;" onblur="projetoHQ.quadros[${i}].narrador=this.innerText; salvarEstado();">${q.narrador}</div>
+                    
+                    <label style="margin-top:10px;">Balões de Fala:</label>
+                    <div class="editavel" contenteditable="true" style="background:#1e293b; color:#93c5fd;" onblur="projetoHQ.quadros[${i}].falas=this.innerText; salvarEstado();">${q.falas}</div>
+
+                    <label style="margin-top:10px;">Onomatopeia Visual (Efeito Sonoro SFX):</label>
+                    <div class="editavel" contenteditable="true" style="background:#2b1919; color:#facc15; font-weight:bold;" onblur="projetoHQ.quadros[${i}].onomatopeia=this.innerText; salvarEstado();">${q.onomatopeia}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // =========================================================================
+        // 3ª ETAPA: PROMPTS COM TRAVA & PROPORÇÃO (--ar)
+        // =========================================================================
+        async function gerarEtapa3() {
+            document.getElementById('load-3').style.display = "block";
+
+            // Determina a tag de proporção com base no formato
+            let tagAR = "--ar 16:9";
+            if (projetoHQ.formato === "webtoon") tagAR = "--ar 9:16";
+            if (projetoHQ.formato === "carrossel") tagAR = "--ar 1:1";
+
+            const prompt = `
+Você é um Especialista em Engenharia de Prompts para Quadrinhos (Midjourney v6 e Leonardo AI).
+Gere os prompts em INGLÊS para cada um destes ${projetoHQ.quadros.length} quadros:
+${JSON.stringify(projetoHQ.quadros.map(q => ({ numero: q.numero, enquadramento: q.enquadramento, descricao: q.descricao })))}
+
+REGRAS OBRIGATÓRIAS:
+1. Incorpore compulsoriamente a descrição de DNA e roupas fixas dos personagens presentes na cena:
+${JSON.stringify(projetoHQ.personagens)}
+2. Termine TODOS os prompts com o estilo visual "${projetoHQ.estilo}" e a proporção de tela "${tagAR}".
+
+RESPONDA EXCLUSIVAMENTE COM JSON:
+{
+  "prompts": [
+    {
+      "numero": 1,
+      "prompt": "cinematic comic book panel illustration, [camera angle], [scene action], [character exact visual dna], dramatic lighting, ${tagAR}"
+    }
+  ]
+}
+`;
+            try {
+                const res = await chamarGemini(prompt);
+                res.prompts.forEach((p, i) => {
+                    if (projetoHQ.quadros[i]) {
+                        projetoHQ.quadros[i].prompt = p.prompt;
+                    }
+                });
+                renderizarEtapa3();
+                salvarEstado();
+            } catch (e) {
+                alert("Erro ao gerar prompts com trava.");
+            } finally {
+                document.getElementById('load-3').style.display = "none";
+            }
+        }
+
+        function renderizarEtapa3() {
+            const container = document.getElementById('listaPrompts');
+            container.innerHTML = "";
+            projetoHQ.quadros.forEach((q, i) => {
+                const card = document.createElement('div');
+                card.className = "bloco-editavel";
+                card.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+                        <h4 style="color:var(--dourado);">Quadro ${q.numero} - Prompt com Trava</h4>
+                        <button class="btn-voltar" style="padding:4px 10px; font-size:0.8rem;" onclick="navigator.clipboard.writeText(projetoHQ.quadros[${i}].prompt); mostrarToast('Copiado!');">Copiar Prompt</button>
                     </div>
+                    <div class="editavel" style="font-family:monospace; color:#a7f3d0; font-size:0.85rem;" contenteditable="true" onblur="projetoHQ.quadros[${i}].prompt=this.innerText; salvarEstado();">${q.prompt}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-                    <div class="painel-corpo ${painel.imagem ? 'com-preview' : ''}">
-                        <!-- Área de Anexar Imagem -->
-                        <div class="upload-area" onclick="document.getElementById('file-${index}').click()">
-                            ${painel.imagem 
-                                ? `<img src="${painel.imagem}" alt="Preview">
-                                   <button class="btn-remover-img" style="display:block;" onclick="event.stopPropagation(); removerImagem(${index})">✕ Remover</button>` 
-                                : `<span class="upload-label">🖼️ Clique para anexar a arte gerada deste quadro</span>`
-                            }
-                            <input type="file" id="file-${index}" style="display:none;" accept="image/*" onchange="carregarImagemPainel(event, ${index})">
-                        </div>
+        // =========================================================================
+        // 4ª ETAPA: MONTAGEM DOS QUADROS (UPLOAD DAS ARTES)
+        // =========================================================================
+        function renderizarEtapa4() {
+            const container = document.getElementById('listaUploads');
+            container.innerHTML = "";
+            projetoHQ.quadros.forEach((q, i) => {
+                const card = document.createElement('div');
+                card.className = "quadro-producao";
+                card.innerHTML = `
+                    <h4>Quadro ${q.numero} (${q.enquadramento})</h4>
+                    <p style="color:var(--texto-secundario); font-size:0.85rem; margin-bottom:10px;">${q.descricao}</p>
+                    <div class="caixa-imagem-baloes" onclick="document.getElementById('img-file-${i}').click()" style="cursor:pointer;">
+                        ${q.imagem 
+                            ? `<img src="${q.imagem}">` 
+                            : `<div style="text-align:center; color:var(--texto-secundario);">🖼️ Clique para anexar a arte deste quadro (da sua pasta do Drive)</div>`
+                        }
+                    </div>
+                    <input type="file" id="img-file-${i}" style="display:none;" accept="image/*" onchange="carregarImagem(${i}, event)">
+                `;
+                container.appendChild(card);
+            });
+        }
 
-                        <!-- Conteúdo Textual -->
-                        <div>
-                            <div class="secao-titulo">🎬 Descrição Visual da Cena:</div>
-                            <div class="editavel" contenteditable="true" onblur="atualizarPainel(${index}, 'descricaoVisual', this.innerText)">${painel.descricaoVisual || ''}</div>
+        function carregarImagem(index, event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    projetoHQ.quadros[index].imagem = e.target.result;
+                    renderizarEtapa4();
+                    salvarEstado();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
 
-                            <div class="secao-titulo">💬 Balões de Fala & Recordatório:</div>
-                            <div class="editavel bloco-falas" contenteditable="true" onblur="atualizarPainel(${index}, 'falas', this.innerText)">${painel.falas || ''}</div>
-
-                            <div class="secao-titulo">🎨 Prompt de Imagem (IA):</div>
-                            <div class="caixa-prompt">
-                                <div class="texto-prompt editavel" contenteditable="true" onblur="atualizarPainel(${index}, 'promptImagem', this.innerText)">${painel.promptImagem || ''}</div>
-                                <button class="btn-copiar-mini" onclick="copiarTexto(this, '${index}')">Copiar Prompt</button>
-                            </div>
-                        </div>
+        // =========================================================================
+        // 5ª ETAPA: BALÕES & ONOMATOPEIAS SOBREPOSTAS
+        // =========================================================================
+        function renderizarEtapa5() {
+            const container = document.getElementById('listaBaloesEdicao');
+            container.innerHTML = "";
+            projetoHQ.quadros.forEach((q, i) => {
+                const card = document.createElement('div');
+                card.className = "quadro-producao";
+                card.innerHTML = `
+                    <h4>Quadro ${q.numero} • Edição Visual de Balões e SFX</h4>
+                    <div class="caixa-imagem-baloes">
+                        ${q.imagem ? `<img src="${q.imagem}">` : `<div style="color:#666;">Sem imagem (Anexe na Etapa 4)</div>`}
+                        ${q.narrador ? `<div class="recordatorio-overlay editavel" contenteditable="true" onblur="projetoHQ.quadros[${i}].narrador=this.innerText; salvarEstado();">${q.narrador}</div>` : ''}
+                        ${q.falas ? `<div class="balao-hq-overlay editavel" style="bottom:20px; left:20px;" contenteditable="true" onblur="projetoHQ.quadros[${i}].falas=this.innerText; salvarEstado();">${q.falas}</div>` : ''}
+                        ${q.onomatopeia ? `<div class="sfx-overlay editavel" contenteditable="true" onblur="projetoHQ.quadros[${i}].onomatopeia=this.innerText; salvarEstado();">${q.onomatopeia}</div>` : ''}
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
 
-        // Atualiza campo modificado diretamente
-        function atualizarPainel(index, campo, valor) {
-            if (dadosHQ.paineis[index]) {
-                dadosHQ.paineis[index][campo] = valor;
-                autoSalvar();
+        // =========================================================================
+        // ETAPA FINAL: LEITOR DE REVISTA DIGITAL HÍBRIDA
+        // =========================================================================
+        function alternarModoLeitor(modo) {
+            const leitor = document.getElementById('revistaConteudo');
+            if (modo === 'webtoon') {
+                leitor.className = "revista-leitor modo-webtoon";
+                mostrarToast("Modo Webtoon (Rolagem Celular) ativado!");
+            } else {
+                leitor.className = "revista-leitor";
+                mostrarToast("Modo Revista Clássica ativado!");
             }
         }
 
-        // Manipulação de Ordem e Painéis
-        function moverPainel(index, direcao) {
-            const novoIndex = index + direcao;
-            if (novoIndex < 0 || novoIndex >= dadosHQ.paineis.length) return;
+        function renderizarEtapa6() {
+            const container = document.getElementById('revistaConteudo');
+            container.innerHTML = "";
 
-            const temp = dadosHQ.paineis[index];
-            dadosHQ.paineis[index] = dadosHQ.paineis[novoIndex];
-            dadosHQ.paineis[novoIndex] = temp;
-
-            renderizarPaineis();
-            autoSalvar();
-        }
-
-        function excluirPainel(index) {
-            if (confirm(`Deseja realmente excluir o Quadro ${index + 1}?`)) {
-                dadosHQ.paineis.splice(index, 1);
-                renderizarPaineis();
-                autoSalvar();
-                mostrarToast("Quadro removido.");
+            if (projetoHQ.formato === 'webtoon') {
+                container.className = "revista-leitor modo-webtoon";
+            } else {
+                container.className = "revista-leitor";
             }
-        }
 
-        function adicionarPainelVazio() {
-            dadosHQ.paineis.push({
-                enquadramento: "Novo Ângulo",
-                descricaoVisual: "Descreva o que acontece visualmente neste novo quadro...",
-                falas: "[Personagem]: 'Nova fala'",
-                promptImagem: "cinematic comic book panel illustration, detailed"
-            });
-            renderizarPaineis();
-            autoSalvar();
-            mostrarToast("Novo quadro adicionado!");
-        }
+            const cabecalho = document.createElement('div');
+            cabecalho.style.textAlign = "center";
+            cabecalho.style.color = "#fff";
+            cabecalho.style.marginBottom = "20px";
+            cabecalho.innerHTML = `
+                <h1 style="color:var(--dourado); font-size:2.2rem; text-transform:uppercase;">${projetoHQ.titulo || "Título do Capítulo"}</h1>
+                <p style="color:#93c5fd; font-style:italic;">${projetoHQ.sinopse || ""}</p>
+            `;
+            container.appendChild(cabecalho);
 
-        // Anexo de Imagens
-        function carregarImagemPainel(evento, index) {
-            const arquivo = evento.target.files[0];
-            if (arquivo) {
-                const leitor = new FileReader();
-                leitor.onload = function(e) {
-                    dadosHQ.paineis[index].imagem = e.target.result;
-                    renderizarPaineis();
-                    autoSalvar();
-                    mostrarToast("Imagem anexada ao quadro!");
-                };
-                leitor.readAsDataURL(arquivo);
-            }
-        }
-
-        function removerImagem(index) {
-            delete dadosHQ.paineis[index].imagem;
-            renderizarPaineis();
-            autoSalvar();
-        }
-
-        // Cópia e Exportações
-        function copiarTexto(botao, index) {
-            const texto = dadosHQ.paineis[index].promptImagem;
-            navigator.clipboard.writeText(texto).then(() => {
-                const anterior = botao.innerText;
-                botao.innerText = "✓ Copiado!";
-                botao.style.background = "var(--verde-sucesso)";
-                botao.style.color = "#fff";
-                setTimeout(() => {
-                    botao.innerText = anterior;
-                    botao.style.background = "";
-                    botao.style.color = "";
-                }, 2000);
+            projetoHQ.quadros.forEach((q) => {
+                const pagina = document.createElement('div');
+                pagina.className = "pagina-revista";
+                pagina.innerHTML = `
+                    <div style="position:relative;">
+                        ${q.imagem ? `<img src="${q.imagem}">` : `<div style="height:320px; background:#111; display:flex; align-items:center; justify-content:center; color:#fff;">Quadro ${q.numero}</div>`}
+                        ${q.narrador ? `<div class="recordatorio-overlay">${q.narrador}</div>` : ''}
+                        ${q.falas ? `<div class="balao-hq-overlay" style="bottom:20px; left:20px;">${q.falas}</div>` : ''}
+                        ${q.onomatopeia ? `<div class="sfx-overlay">${q.onomatopeia}</div>` : ''}
+                    </div>
+                `;
+                container.appendChild(pagina);
             });
         }
 
-        function copiarTodosOsPrompts() {
-            if (!dadosHQ.paineis.length) {
-                alert("Nenhum roteiro gerado ainda!");
-                return;
-            }
-            let compilado = "";
-            dadosHQ.paineis.forEach((p, i) => {
-                compilado += `[PAINEL ${i + 1} - ${p.enquadramento}]\n${p.promptImagem}\n\n`;
-            });
-            navigator.clipboard.writeText(compilado);
-            mostrarToast("Todos os prompts foram copiados!");
-        }
-
-        function exportarRoteiroTexto() {
-            if (!dadosHQ.paineis.length) return alert("Crie uma HQ antes de exportar!");
-
-            let txt = `====================================================\n`;
-            txt += `${dadosHQ.titulo.toUpperCase()}\n`;
-            txt += `Mensagem: ${dadosHQ.licao}\n`;
-            txt += `====================================================\n\n`;
-
-            dadosHQ.paineis.forEach((p, i) => {
-                txt += `--- QUADRO ${i + 1}: ${p.enquadramento} ---\n`;
-                txt += `VISUAL: ${p.descricaoVisual}\n`;
-                txt += `FALAS: ${p.falas}\n`;
-                txt += `PROMPT IA: ${p.promptImagem}\n\n`;
-            });
-
-            baixarArquivo(txt, `${dadosHQ.titulo || 'roteiro'}.txt`, 'text/plain');
-            mostrarToast("Roteiro baixado!");
-        }
-
-        function salvarProjetoArquivo() {
-            dadosHQ.titulo = document.getElementById('resTitulo').innerText;
-            dadosHQ.licao = document.getElementById('resLicao').innerText;
-            const strJSON = JSON.stringify(dadosHQ, null, 2);
-            baixarArquivo(strJSON, `${dadosHQ.titulo || 'projeto-hq'}.json`, 'application/json');
-            mostrarToast("Projeto salvo no computador!");
-        }
-
-        function abrirProjetoArquivo(evento) {
-            const file = evento.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    dadosHQ = JSON.parse(e.target.result);
-                    renderizarPaineis();
-                    document.getElementById('resultado-area').style.display = 'block';
-                    autoSalvar();
-                    mostrarToast("Projeto aberto com sucesso!");
-                } catch (err) {
-                    alert("Arquivo de projeto inválido.");
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function novaHQ() {
-            if (confirm("Deseja iniciar uma Nova HQ? O projeto atual continuará salvo no seu navegador.")) {
-                dadosHQ = { titulo: "Novo Título", licao: "Nova Lição", paineis: [] };
-                document.getElementById('cenaTema').value = "";
-                document.getElementById('resultado-area').style.display = "none";
-                autoSalvar();
-            }
-        }
-
-        function autoSalvar() {
-            dadosHQ.titulo = document.getElementById('resTitulo').innerText;
-            dadosHQ.licao = document.getElementById('resLicao').innerText;
-            localStorage.setItem('hq_gospel_studio_dados', JSON.stringify(dadosHQ));
-            const status = document.getElementById('statusSalvo');
-            status.style.opacity = "1";
-            setTimeout(() => { status.style.opacity = "0.7"; }, 800);
-        }
-
-        function baixarArquivo(conteudo, nome, tipo) {
-            const blob = new Blob([conteudo], { type: tipo });
+        function salvarCapituloFinal() {
+            const blob = new Blob([JSON.stringify(projetoHQ, null, 2)], { type: 'application/json' });
             const link = document.createElement('a');
             link.href = URL.createObjectURL(blob);
-            link.download = nome;
+            link.download = `${projetoHQ.titulo || 'capitulo-hq'}.json`;
             link.click();
+            mostrarToast("Capítulo salvo em seu computador!");
         }
 
-        function mostrarToast(mensagem) {
+        function restaurarInterface() {
+            if (projetoHQ.titulo) document.getElementById('resTitulo').innerText = projetoHQ.titulo;
+            if (projetoHQ.sinopse) document.getElementById('resSinopse').innerText = projetoHQ.sinopse;
+            if (projetoHQ.formato) document.getElementById('formatoPublicacao').value = projetoHQ.formato;
+            renderizarPersonagens();
+            renderizarEtapa2();
+            renderizarEtapa3();
+            if (projetoHQ.etapaAtual) irParaEtapa(projetoHQ.etapaAtual);
+        }
+
+        async function chamarGemini(promptTexto) {
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${CHAVE_GEMINI}`;
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: promptTexto }] }] })
+            });
+            const data = await res.json();
+            let texto = data.candidates[0].content.parts[0].text;
+            texto = texto.replace(/```json/gi, '').replace(/```/gi, '').trim();
+            return JSON.parse(texto);
+        }
+
+        function mostrarToast(msg) {
             const t = document.getElementById('toast');
-            t.innerText = mensagem;
-            t.style.display = 'block';
-            setTimeout(() => { t.style.display = 'none'; }, 2500);
+            t.innerText = msg;
+            t.style.display = "block";
+            setTimeout(() => { t.style.display = "none"; }, 2500);
         }
     </script>
 </body>
