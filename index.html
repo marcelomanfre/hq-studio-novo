@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HQ Gospel Studio - Edição Profissional</title>
+    <title>HQ Gospel Studio - Ritmo Dinâmico</title>
     <style>
         /* ========================================================
-           DESIGN SYSTEM - HQ ÉPICA DARK COM DOURADO E ESTILO MANGA
+           DESIGN SYSTEM - HQ ÉPICA DARK COM RITMO DINÂMICO
            ======================================================== */
         :root {
             --fundo-base: #090c10;
@@ -18,8 +18,9 @@
             --texto-principal: #f3f4f6;
             --texto-secundario: #9ca3af;
             --azul-hq: #3b82f6;
+            --roxo-climax: #a855f7;
             --verde-sucesso: #10b981;
-            --vermelho-onomatopeia: #ef4444;
+            --vermelho-alerta: #ef4444;
             --balao-fundo: #ffffff;
             --balao-texto: #000000;
         }
@@ -28,7 +29,7 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
@@ -64,7 +65,7 @@
             font-size: 0.95rem;
         }
 
-        /* Stepper - Barra de Etapas */
+        /* Stepper de Produção */
         .stepper-container {
             display: flex;
             justify-content: space-between;
@@ -143,7 +144,6 @@
             padding-bottom: 12px;
         }
 
-        /* Formulários e Entradas */
         .campo {
             margin-bottom: 18px;
         }
@@ -182,7 +182,6 @@
             gap: 15px;
         }
 
-        /* Blocos Editáveis */
         .bloco-editavel {
             background: rgba(0,0,0,0.25);
             border: 1px solid var(--borda);
@@ -202,7 +201,7 @@
             background: rgba(0,0,0,0.5);
         }
 
-        /* Ficha Técnica de Personagens */
+        /* DNA Visual dos Personagens */
         .dna-card {
             background: #18202c;
             border: 1px solid #283548;
@@ -219,7 +218,18 @@
             margin-bottom: 4px;
         }
 
-        /* Botões de Ação */
+        /* Badges de Ritmo Narrativo */
+        .badge-ritmo {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .badge-ritmo.normal { background: #263345; color: #93c5fd; }
+        .badge-ritmo.climax { background: var(--roxo-climax); color: #fff; box-shadow: 0 0 10px rgba(168,85,247,0.4); }
+        .badge-ritmo.rapido { background: #374151; color: #e5e7eb; }
+
         .barra-navegacao-etapa {
             display: flex;
             justify-content: space-between;
@@ -253,9 +263,7 @@
             transition: 0.2s;
         }
 
-        .btn-aprovar:hover {
-            filter: brightness(1.15);
-        }
+        .btn-aprovar:hover { filter: brightness(1.15); }
 
         .btn-gerar-ia {
             background: var(--dourado);
@@ -268,13 +276,30 @@
             margin-bottom: 15px;
         }
 
-        /* Quadros de Produção */
+        .btn-add-quadro {
+            width: 100%;
+            background: #182232;
+            border: 2px dashed var(--borda);
+            color: var(--dourado);
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px 0 25px 0;
+            transition: 0.2s all;
+        }
+        .btn-add-quadro:hover { border-color: var(--dourado); background: #1f2b3e; }
+
+        /* Quadros e Visualizadores */
         .quadro-producao {
             background: #141b24;
             border: 2px solid var(--borda);
             border-radius: 10px;
             padding: 16px;
             margin-bottom: 20px;
+        }
+        .quadro-producao.climax-borda {
+            border-color: var(--roxo-climax);
         }
 
         .caixa-imagem-baloes {
@@ -288,6 +313,9 @@
             overflow: hidden;
             margin-bottom: 15px;
         }
+        .caixa-imagem-baloes.climax-box {
+            min-height: 480px; /* Splash Page é maior visualmente */
+        }
 
         .caixa-imagem-baloes img {
             width: 100%;
@@ -295,7 +323,6 @@
             display: block;
         }
 
-        /* Balões de Fala e Onomatopeias Visuais */
         .balao-hq-overlay {
             position: absolute;
             background: var(--balao-fundo);
@@ -327,19 +354,19 @@
         .sfx-overlay {
             position: absolute;
             color: #facc15;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 900;
             text-transform: uppercase;
             text-shadow: 3px 3px 0px #000, -2px -2px 0px #000, 2px -2px 0px #000, -2px 2px 0px #000;
             letter-spacing: 2px;
             transform: rotate(-10deg);
             cursor: move;
-            top: 15px;
-            right: 20px;
+            top: 20px;
+            right: 25px;
             user-select: none;
         }
 
-        /* Revista Digital (Leitor Híbrido) */
+        /* Revista Digital */
         .barra-leitor-controles {
             display: flex;
             justify-content: space-between;
@@ -361,14 +388,12 @@
             background: #000;
         }
 
-        /* Estilo Webtoon (Celular - Rolagem Fluida) */
         .revista-leitor.modo-webtoon {
             gap: 0px !important;
             max-width: 600px;
             margin: 0 auto;
             padding: 0px;
         }
-
         .revista-leitor.modo-webtoon .pagina-revista {
             border: none;
             margin-bottom: 0px;
@@ -384,18 +409,13 @@
             color: #000;
             position: relative;
         }
-
-        .pagina-revista img {
-            width: 100%;
-            display: block;
+        .pagina-revista.splash-page {
+            max-width: 900px; /* Splash ocupa mais tela */
+            border: 12px solid #000;
         }
 
-        .loading {
-            display: none;
-            color: var(--dourado);
-            font-weight: bold;
-            margin: 10px 0;
-        }
+        .pagina-revista img { width: 100%; display: block; }
+        .loading { display: none; color: var(--dourado); font-weight: bold; margin: 10px 0; }
 
         .toast {
             position: fixed;
@@ -413,7 +433,7 @@
 
         @media print {
             body { background: #fff !important; color: #000 !important; padding: 0 !important; }
-            header, .stepper-container, .barra-navegacao-etapa, .btn-gerar-ia, .barra-leitor-controles { display: none !important; }
+            header, .stepper-container, .barra-navegacao-etapa, .btn-gerar-ia, .btn-add-quadro, .barra-leitor-controles { display: none !important; }
             .etapa-painel { border: none !important; box-shadow: none !important; background: transparent !important; }
             .pagina-revista { page-break-after: always; border: none; box-shadow: none; width: 100%; max-width: 100%; }
         }
@@ -424,19 +444,19 @@
     <div class="container">
         <header>
             <h1>HQ Gospel Studio</h1>
-            <p>Plataforma Profissional de Quadrinhos e Mangás Bíblicos</p>
+            <p>Roteirização Profissional com Ritmo Visual Dinâmico</p>
         </header>
 
-        <!-- Stepper (Esteira de Produção) -->
+        <!-- Stepper -->
         <div class="stepper-container">
             <div class="step-item active" id="step-nav-1" onclick="irParaEtapa(1)">
-                <span class="step-numero">1</span> Formato & DNA
+                <span class="step-numero">1</span> Formato & Ritmo
             </div>
             <div class="step-item" id="step-nav-2" onclick="irParaEtapa(2)">
                 <span class="step-numero">2</span> Falas & SFX
             </div>
             <div class="step-item" id="step-nav-3" onclick="irParaEtapa(3)">
-                <span class="step-numero">3</span> Prompts com Trava
+                <span class="step-numero">3</span> Prompts & Câmera
             </div>
             <div class="step-item" id="step-nav-4" onclick="irParaEtapa(4)">
                 <span class="step-numero">4</span> Montagem Quadros
@@ -450,24 +470,24 @@
         </div>
 
         <!-- ========================================================
-             1ª ETAPA: FORMATO DE PUBLICAÇÃO, ROTEIRO & DNA VISUAL
+             1ª ETAPA: FORMATO, RITMO NARRATIVO & DNA VISUAL
              ======================================================== -->
         <div class="etapa-painel ativa" id="etapa-1">
-            <h2 class="etapa-titulo">1ª Etapa: Formato de Publicação, Roteiro & DNA Visual</h2>
-            <p class="etapa-descricao">Selecione o formato de leitura da juventude e defina a cena para gerar a sinopse e a ficha fisionômica invariável dos personagens.</p>
+            <h2 class="etapa-titulo">1ª Etapa: Formato, Ritmo Narrativo & DNA dos Personagens</h2>
+            <p class="etapa-descricao">A IA vai analisar a passagem e definir a quantidade e peso dramático de cada quadro automaticamente (incluindo Splash Pages para momentos de milagre/impacto).</p>
 
             <div class="campo">
                 <label for="formatoPublicacao">Formato da Publicação:</label>
-                <select id="formatoPublicacao" onchange="atualizarConfiguracaoFormato()">
+                <select id="formatoPublicacao">
                     <option value="webtoon">📱 Webtoon Vertical (Rolagem contínua para celular - Padrão Gen Z)</option>
                     <option value="graphic-novel" selected>📖 Graphic Novel / Mangá (Páginas clássicas cinematográficas)</option>
-                    <option value="carrossel">📸 Carrossel de Redes Sociais (4 a 8 telas quadradas para Instagram/TikTok)</option>
+                    <option value="carrossel">📸 Carrossel de Redes Sociais (Instagram/TikTok)</option>
                 </select>
             </div>
 
             <div class="campo">
                 <label for="temaInput">Passagem Bíblica / Tema da Cena:</label>
-                <input type="text" id="temaInput" placeholder="Ex: A ressurreição de Lázaro com foco na emoção e poder de Cristo">
+                <input type="text" id="temaInput" placeholder="Ex: Jesus acalmando a tempestade (Marcos 4:35-41)">
             </div>
 
             <div class="grid-3">
@@ -481,43 +501,46 @@
                 </div>
 
                 <div class="campo">
-                    <label for="estiloVisual">Estilo Artístico:</label>
-                    <select id="estiloVisual">
-                        <option value="Manga Shonen vibrante com linhas de ação e alto dinamismo emocional">🥋 Mangá Shonen Dinâmico</option>
-                        <option value="Webtoon digital moderno com iluminação cinematográfica e cores quentes">📱 Webtoon Moderno</option>
-                        <option value="Graphic Novel clássica épica ao estilo Marvel/DC com realismo solene">🏛️ Graphic Novel Clássica</option>
+                    <label for="ritmoPreferencia">Ritmo Narrativo Desejado:</label>
+                    <select id="ritmoPreferencia">
+                        <option value="dinamico-climax" selected>⚡ Ritmo Dinâmico Profissional (Diálogos + Splash Page Clímax)</option>
+                        <option value="acao-rapida">💥 Ação e Cortes Rápidos (Mais quadros de reação)</option>
+                        <option value="emotivo-contemplativo">🕊️ Reflexivo / Solene (Quadros amplos e expressivos)</option>
                     </select>
                 </div>
 
                 <div class="campo">
-                    <label for="qtdPaineis">Quantidade de Quadros:</label>
-                    <select id="qtdPaineis">
-                        <option value="4">4 Quadros (Impacto Rápido)</option>
-                        <option value="6" selected>6 Quadros (Cena Completa Padrão)</option>
-                        <option value="8">8 Quadros (Capítulo Detalhado)</option>
+                    <label for="estiloVisual">Estilo Artístico:</label>
+                    <select id="estiloVisual">
+                        <option value="Manga Shonen vibrante com traços marcantes e alta intensidade">🥋 Mangá Shonen Dinâmico</option>
+                        <option value="Webtoon digital moderno com iluminação cinematográfica">📱 Webtoon Moderno</option>
+                        <option value="Graphic Novel clássica épica estilo Marvel/DC com realismo solene">🏛️ Graphic Novel Clássica</option>
                     </select>
                 </div>
             </div>
 
             <div class="campo">
                 <label for="diretrizesInput">Diretrizes Teológicas & Técnicas:</label>
-                <textarea id="diretrizesInput" placeholder="Ex: Baseado em João 11; Focar no contraste entre a dor das irmãs e a autoridade compassiva de Jesus; Linguagem jovem e direta."></textarea>
+                <textarea id="diretrizesInput" placeholder="Ex: Enfatizar o contraste entre o pavor humano e a autoridade divina da voz de Jesus; Linguagem cativante."></textarea>
             </div>
 
-            <button class="btn-gerar-ia" onclick="gerarEtapa1()">⚡ Gerar Roteiro e Ficha de Personagens</button>
-            <div class="loading" id="load-1">✍️ Criando roteiro e travas de consistência visual com Gemini 3.8...</div>
+            <button class="btn-gerar-ia" onclick="gerarEtapa1()">⚡ Gerar Roteiro com Ritmo Dinâmico & DNA</button>
+            <div class="loading" id="load-1">✍️ A IA está desenhando a curva dramática da história...</div>
 
-            <!-- Área de Revisão -->
+            <!-- Revisão Etapa 1 -->
             <div id="revisao-etapa-1" style="display:none; margin-top:20px;">
                 <div class="bloco-editavel">
                     <label>Título da História:</label>
                     <h3 class="editavel" id="resTitulo" contenteditable="true" onblur="salvarEstado()">Título</h3>
-                    <label style="margin-top:10px;">Sinopse & Mensagem Espiritual:</label>
+                    <label style="margin-top:10px;">Sinopse & Curva Dramática:</label>
                     <div class="editavel" id="resSinopse" contenteditable="true" onblur="salvarEstado()">Sinopse</div>
                 </div>
 
                 <label>Ficha Técnica de Consistência (DNA Visual Invariável):</label>
                 <div id="listaPersonagens"></div>
+
+                <label style="margin-top:15px; display:block;">Estrutura dos Quadros Ritmados pela IA:</label>
+                <div id="resumoRitmoQuadros" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:15px;"></div>
 
                 <div class="barra-navegacao-etapa">
                     <span></span>
@@ -527,16 +550,18 @@
         </div>
 
         <!-- ========================================================
-             2ª ETAPA: FALAS, NARRAÇÃO & ONOMATOPEIAS (SFX)
+             2ª ETAPA: FALAS, NARRAÇÃO & SFX
              ======================================================== -->
         <div class="etapa-painel" id="etapa-2">
-            <h2 class="etapa-titulo">2ª Etapa: Falas, Narração & Onomatopeias Visuais (SFX)</h2>
-            <p class="etapa-descricao">Revise os diálogos e os efeitos sonoros desenhados na tela para garantir o ritmo e a emoção dos quadrinhos jovens.</p>
+            <h2 class="etapa-titulo">2ª Etapa: Falas, Narração & Onomatopeias (SFX)</h2>
+            <p class="etapa-descricao">Ajuste as falas, narrações e os efeitos sonoros. Você pode adicionar ou excluir quadros livremente para controlar o ritmo.</p>
 
-            <button class="btn-gerar-ia" onclick="gerarEtapa2()">⚡ Roteirizar Diálogos e Onomatopeias com IA</button>
-            <div class="loading" id="load-2">✍️ Escrevendo balões de fala, pensamentos e efeitos sonoros...</div>
+            <button class="btn-gerar-ia" onclick="gerarEtapa2()">⚡ Roteirizar Diálogos e Efeitos Sonoros com IA</button>
+            <div class="loading" id="load-2">✍️ Escrevendo diálogos e onomatopeias dramáticas...</div>
 
             <div id="listaFalas"></div>
+
+            <button class="btn-add-quadro" onclick="adicionarNovoQuadroManual()">➕ Adicionar Mais Um Quadro Nesta Cena</button>
 
             <div class="barra-navegacao-etapa">
                 <button class="btn-voltar" onclick="irParaEtapa(1)">← Voltar ao Roteiro</button>
@@ -545,14 +570,14 @@
         </div>
 
         <!-- ========================================================
-             3ª ETAPA: PROMPTS COM TRAVA & ASPECT RATIO
+             3ª ETAPA: PROMPTS COM TRAVA & CÂMERA
              ======================================================== -->
         <div class="etapa-painel" id="etapa-3">
-            <h2 class="etapa-titulo">3ª Etapa: Prompts com Trava de Consistência & Proporção</h2>
-            <p class="etapa-descricao">Cada comando de imagem gerado aqui já inclui automaticamente o DNA fisionômico dos personagens e as tags de formato (--ar) para Midjourney e Leonardo AI.</p>
+            <h2 class="etapa-titulo">3ª Etapa: Prompts com Trava de Consistência & Câmera</h2>
+            <p class="etapa-descricao">Prompts gerados com travas fisionômicas e proporções adaptadas para cada tipo de enquadramento (Close, Panorâmica ou Splash).</p>
 
-            <button class="btn-gerar-ia" onclick="gerarEtapa3()">⚡ Gerar Prompts com Trava de Consistência</button>
-            <div class="loading" id="load-3">✍️ Integrando fichas técnicas e parâmetros visuais...</div>
+            <button class="btn-gerar-ia" onclick="gerarEtapa3()">⚡ Gerar Prompts Técnicos de Imagem</button>
+            <div class="loading" id="load-3">✍️ Integrando fichas técnicas, proporções e iluminação aos comandos...</div>
 
             <div id="listaPrompts"></div>
 
@@ -563,11 +588,11 @@
         </div>
 
         <!-- ========================================================
-             4ª ETAPA: MONTAGEM DOS QUADROS (UPLOAD DAS ARTES)
+             4ª ETAPA: MONTAGEM DOS QUADROS (UPLOAD)
              ======================================================== -->
         <div class="etapa-painel" id="etapa-4">
-            <h2 class="etapa-titulo">4ª Etapa: Montagem dos Quadros (Artes do Google Drive)</h2>
-            <p class="etapa-descricao">Arraste as imagens finais que você gerou e salvou no seu Google Drive para cada respectivo quadro da história.</p>
+            <h2 class="etapa-titulo">4ª Etapa: Montagem das Ilustrações</h2>
+            <p class="etapa-descricao">Arraste as artes finais geradas no Midjourney/Leonardo da sua pasta do Google Drive para cada quadro.</p>
 
             <div id="listaUploads"></div>
 
@@ -578,17 +603,17 @@
         </div>
 
         <!-- ========================================================
-             5ª ETAPA: EDIÇÃO DE BALÕES & ONOMATOPEIAS VISUAIS
+             5ª ETAPA: BALÕES & ONOMATOPEIAS
              ======================================================== -->
         <div class="etapa-painel" id="etapa-5">
-            <h2 class="etapa-titulo">5ª Etapa: Inclusão e Edição dos Balões & Onomatopeias</h2>
-            <p class="etapa-descricao">Veja as falas, recordatórios e efeitos sonoros sobrepostos à ilustração. Edite os textos livremente na própria cena.</p>
+            <h2 class="etapa-titulo">5ª Etapa: Posicionamento dos Balões & Onomatopeias</h2>
+            <p class="etapa-descricao">Visualize e edite os balões e efeitos sonoros sobrepostos à imagem. Clique nos textos para ajustar falas diretamente na cena.</p>
 
             <div id="listaBaloesEdicao"></div>
 
             <div class="barra-navegacao-etapa">
                 <button class="btn-voltar" onclick="irParaEtapa(4)">← Voltar à Montagem</button>
-                <button class="btn-aprovar" onclick="aprovarEtapa(5, 6)">✓ Aprovar Revista e Finalizar Capítulo</button>
+                <button class="btn-aprovar" onclick="aprovarEtapa(5, 6)">✓ Aprovar e Abrir Revista Digital</button>
             </div>
         </div>
 
@@ -596,22 +621,22 @@
              ETAPA FINAL: REVISTA DIGITAL HÍBRIDA
              ======================================================== -->
         <div class="etapa-painel" id="etapa-6">
-            <h2 class="etapa-titulo">Etapa Final: Leitor de Revista Digital Híbrida</h2>
-            <p class="etapa-descricao">O capítulo está finalizado para leitura contínua no celular ou computador.</p>
+            <h2 class="etapa-titulo">Etapa Final: Leitor de Revista Digital</h2>
+            <p class="etapa-descricao">A história está diagramada com ritmo profissional para os jovens lerem no celular ou impressa.</p>
 
             <div class="barra-leitor-controles">
                 <div style="display:flex; gap:10px;">
-                    <button class="btn-voltar" id="btnModoWebtoon" onclick="alternarModoLeitor('webtoon')">📱 Modo Webtoon (Rolagem Celular)</button>
-                    <button class="btn-voltar" id="btnModoRevista" onclick="alternarModoLeitor('revista')">📖 Modo Revista / Álbum</button>
+                    <button class="btn-voltar" onclick="alternarModoLeitor('webtoon')">📱 Modo Webtoon (Rolagem Vertical)</button>
+                    <button class="btn-voltar" onclick="alternarModoLeitor('revista')">📖 Modo Revista Clássica</button>
                 </div>
-                <button class="btn-gerar-ia" style="margin:0;" onclick="window.print()">🖨️ Imprimir / Salvar em PDF</button>
+                <button class="btn-gerar-ia" style="margin:0;" onclick="window.print()">🖨️ Imprimir / Salvar PDF</button>
             </div>
 
             <div class="revista-leitor" id="revistaConteudo"></div>
 
             <div class="barra-navegacao-etapa">
                 <button class="btn-voltar" onclick="irParaEtapa(5)">← Voltar à Edição de Balões</button>
-                <button class="btn-aprovar" onclick="salvarCapituloFinal()">💾 Baixar Capítulo Pronto (.json)</button>
+                <button class="btn-aprovar" onclick="salvarCapituloFinal()">💾 Baixar Capítulo Completo (.json)</button>
             </div>
         </div>
     </div>
@@ -619,7 +644,7 @@
     <div class="toast" id="toast">Aviso do Sistema</div>
 
     <!-- ========================================================
-         SCRIPT: LÓGICA DE PRODUÇÃO, TRAVAS E GEMINI 3.8 FLASH
+         SCRIPT: ENGINE DE RITMO DINÂMICO & GEMINI 3.8
          ======================================================== -->
     <script>
         const CHAVE_GEMINI = "AQ.Ab8RN6KIK5ROBX1ZvuX2sHxKlNYO8BDg6JT28yoXjhMrTyeLZw";
@@ -630,12 +655,12 @@
             titulo: "",
             sinopse: "",
             estilo: "",
-            personagens: [], 
-            quadros: [] // { numero, enquadramento, descricao, narrador, falas, onomatopeia, prompt, imagem }
+            personagens: [],
+            quadros: [] // { numero, tipoRitmo, enquadramento, descricao, narrador, falas, onomatopeia, prompt, imagem }
         };
 
         window.addEventListener('DOMContentLoaded', () => {
-            const salvo = localStorage.getItem('hq_gospel_studio_v2');
+            const salvo = localStorage.getItem('hq_gospel_studio_dinamico');
             if (salvo) {
                 try {
                     projetoHQ = JSON.parse(salvo);
@@ -645,7 +670,7 @@
         });
 
         function salvarEstado() {
-            localStorage.setItem('hq_gospel_studio_v2', JSON.stringify(projetoHQ));
+            localStorage.setItem('hq_gospel_studio_dinamico', JSON.stringify(projetoHQ));
         }
 
         function irParaEtapa(numero) {
@@ -665,23 +690,18 @@
 
         function aprovarEtapa(atual, proxima) {
             document.getElementById(`step-nav-${atual}`).classList.add('completed');
-            mostrarToast(`Etapa ${atual} aprovada com sucesso!`);
+            mostrarToast(`Etapa ${atual} aprovada!`);
             irParaEtapa(proxima);
         }
 
-        function atualizarConfiguracaoFormato() {
-            projetoHQ.formato = document.getElementById('formatoPublicacao').value;
-            salvarEstado();
-        }
-
         // =========================================================================
-        // 1ª ETAPA: ROTEIRO & PERSONAGENS (DNA VISUAL)
+        // 1ª ETAPA: IA GERA RITMO NARRATIVO DINÂMICO (SEM TRAVA FIXA)
         // =========================================================================
         async function gerarEtapa1() {
             const tema = document.getElementById('temaInput').value.trim();
             const faixa = document.getElementById('faixaEtaria').value;
             const estilo = document.getElementById('estiloVisual').value;
-            const qtd = document.getElementById('qtdPaineis').value;
+            const ritmo = document.getElementById('ritmoPreferencia').value;
             const dir = document.getElementById('diretrizesInput').value.trim();
             projetoHQ.formato = document.getElementById('formatoPublicacao').value;
             projetoHQ.estilo = estilo;
@@ -690,30 +710,46 @@
 
             document.getElementById('load-1').style.display = "block";
 
+            // Prompt que exige ritmo variável e splash page no momento de clímax
             const prompt = `
-Você é um Roteirista Master de HQs e comunicador bíblico para a juventude.
-Crie a Sinopse Geral e a FICHA TÉCNICA DE CONSISTÊNCIA VISUAL DOS PERSONAGENS (Character Sheet) para:
-- TEMA: ${tema}
-- FORMATO: ${projetoHQ.formato}
-- PÚBLICO: ${faixa}
-- ESTILO: ${estilo}
-- TOTAL DE QUADROS: Exatamente ${qtd} quadros.
-- DIRETRIZES: ${dir || "Fidelidade bíblica com alta intensidade dramática para jovens."}
+Você é um Roteirista Master de HQs e especialista em Ritmo Visual (Pacing de Quadrinhos).
+ANALISE A CENA BÍBLICA: "${tema}"
+Público: ${faixa} | Estilo: ${estilo} | Preferência de Ritmo: ${ritmo}
+Diretrizes: ${dir || "Fidelidade bíblica com alta intensidade dramática para jovens."}
 
-Para cada personagem, detalhe minuciosamente sua aparência física constante e roupas características para travar a IA de imagem.
+NÃO PRENDA A HISTÓRIA EM UMA QUANTIDADE FIXA MONÓTONA DE QUADROS!
+Crie uma curva dramática com a quantidade de quadros que a cena realmente precisa (entre 4 a 7 quadros):
+- Crie quadros de preparação/diálogo ("tipoRitmo": "normal").
+- Crie quadros rápidos de reação/tensão ("tipoRitmo": "rapido").
+- OBRIGATÓRIO: Identifique o momento de milagre, clímax ou revelação suprema e transforme em uma Splash Page de Impacto ("tipoRitmo": "climax").
 
-RESPONDA EXCLUSIVAMENTE COM UM JSON VÁLIDO NESTE FORMATO:
+Também extraia a FICHA DE CONSISTÊNCIA VISUAL DE PERSONAGENS com DNA físico e roupas fixas.
+
+RESPONDA EXCLUSIVAMENTE COM UM JSON NESTE FORMATO:
 {
   "titulo": "Título da História",
-  "sinopse": "Sinopse e lição central",
+  "sinopse": "Sinopse e curva dramática",
   "personagens": [
     {
-      "nome": "Nome do Personagem",
-      "dnaVisual": "Ex: Homem de 30 anos, traços do oriente médio, barba escura aparada, olhar compassivo e marcante, pele morena",
-      "roupasFixas": "Ex: Túnica cor linho cru com manto índigo desgastado nas bordas"
+      "nome": "Nome",
+      "dnaVisual": "Traços físicos detalhados",
+      "roupasFixas": "Roupas e cores características"
     }
   ],
-  "qtdQuadros": ${qtd}
+  "quadrosPlanejados": [
+    {
+      "numero": 1,
+      "tipoRitmo": "normal",
+      "enquadramento": "Plano Médio / Plano Aberto / etc",
+      "papelDramatico": "Ex: Preparação e tensão inicial"
+    },
+    {
+      "numero": 2,
+      "tipoRitmo": "climax",
+      "enquadramento": "Splash Page Panorâmica de Impacto",
+      "papelDramatico": "Ex: O Clímax do milagre divino"
+    }
+  ]
 }
 `;
             try {
@@ -722,326 +758,30 @@ RESPONDA EXCLUSIVAMENTE COM UM JSON VÁLIDO NESTE FORMATO:
                 projetoHQ.sinopse = res.sinopse;
                 projetoHQ.personagens = res.personagens;
 
-                projetoHQ.quadros = [];
-                for (let i = 1; i <= res.qtdQuadros; i++) {
-                    projetoHQ.quadros.push({
-                        numero: i,
-                        enquadramento: `Quadro ${i}`,
-                        descricao: '',
-                        narrador: '',
-                        falas: '',
-                        onomatopeia: '',
-                        prompt: '',
-                        imagem: null
-                    });
-                }
+                // Inicializa os quadros com o ritmo dramático sugerido
+                projetoHQ.quadros = res.quadrosPlanejados.map(qp => ({
+                    numero: qp.numero,
+                    tipoRitmo: qp.tipoRitmo || 'normal',
+                    enquadramento: qp.enquadramento || 'Cena',
+                    descricao: qp.papelDramatico || '',
+                    narrador: '',
+                    falas: '',
+                    onomatopeia: '',
+                    prompt: '',
+                    imagem: null
+                }));
 
                 document.getElementById('resTitulo').innerText = projetoHQ.titulo;
                 document.getElementById('resSinopse').innerText = projetoHQ.sinopse;
 
                 renderizarPersonagens();
+                renderizarResumoRitmo();
+
                 document.getElementById('revisao-etapa-1').style.display = "block";
                 salvarEstado();
             } catch (e) {
-                alert("Erro ao roteirizar a cena. Tente novamente.");
+                alert("Erro ao analisar a cena. Tente novamente.");
             } finally {
                 document.getElementById('load-1').style.display = "none";
             }
         }
-
-        function renderizarPersonagens() {
-            const container = document.getElementById('listaPersonagens');
-            container.innerHTML = "";
-            projetoHQ.personagens.forEach((p, i) => {
-                const card = document.createElement('div');
-                card.className = "dna-card";
-                card.innerHTML = `
-                    <div class="dna-nome editavel" contenteditable="true" onblur="projetoHQ.personagens[${i}].nome=this.innerText; salvarEstado();">${p.nome}</div>
-                    <div style="font-size:0.85rem; color:#93c5fd; margin-bottom:4px;"><b>DNA Físico:</b> <span class="editavel" contenteditable="true" onblur="projetoHQ.personagens[${i}].dnaVisual=this.innerText; salvarEstado();">${p.dnaVisual}</span></div>
-                    <div style="font-size:0.85rem; color:#fde68a;"><b>Traje Fixo:</b> <span class="editavel" contenteditable="true" onblur="projetoHQ.personagens[${i}].roupasFixas=this.innerText; salvarEstado();">${p.roupasFixas}</span></div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // =========================================================================
-        // 2ª ETAPA: FALAS, NARRAÇÃO & ONOMATOPEIAS (SFX)
-        // =========================================================================
-        async function gerarEtapa2() {
-            document.getElementById('load-2').style.display = "block";
-
-            const prompt = `
-Com base no roteiro "${projetoHQ.titulo}" e nos personagens: ${JSON.stringify(projetoHQ.personagens)},
-Crie as Falas, Textos de Narração e ONOMATOPEIAS VISUAIS (Efeitos Sonoros como KRA-KOOM, SHHHH, WHAM, etc.) para os ${projetoHQ.quadros.length} quadros.
-
-RESPONDA EXCLUSIVAMENTE COM JSON:
-{
-  "quadros": [
-    {
-      "numero": 1,
-      "enquadramento": "Plano Aberto / Close-up / etc",
-      "descricao": "Ação visual do quadro",
-      "narrador": "Texto de recordatório ou vazio",
-      "falas": "[Personagem]: 'Fala impactante'",
-      "onomatopeia": "SFX sonoro de impacto ou vazio"
-    }
-  ]
-}
-`;
-            try {
-                const res = await chamarGemini(prompt);
-                res.quadros.forEach((q, i) => {
-                    if (projetoHQ.quadros[i]) {
-                        projetoHQ.quadros[i].enquadramento = q.enquadramento;
-                        projetoHQ.quadros[i].descricao = q.descricao;
-                        projetoHQ.quadros[i].narrador = q.narrador || "";
-                        projetoHQ.quadros[i].falas = q.falas || "";
-                        projetoHQ.quadros[i].onomatopeia = q.onomatopeia || "";
-                    }
-                });
-                renderizarEtapa2();
-                salvarEstado();
-            } catch (e) {
-                alert("Erro ao criar diálogos. Tente novamente.");
-            } finally {
-                document.getElementById('load-2').style.display = "none";
-            }
-        }
-
-        function renderizarEtapa2() {
-            const container = document.getElementById('listaFalas');
-            container.innerHTML = "";
-            projetoHQ.quadros.forEach((q, i) => {
-                const card = document.createElement('div');
-                card.className = "bloco-editavel";
-                card.innerHTML = `
-                    <h4 style="color:var(--dourado); margin-bottom:8px;">Quadro ${q.numero} (${q.enquadramento})</h4>
-                    <label>Ação Visual da Cena:</label>
-                    <div class="editavel" contenteditable="true" onblur="projetoHQ.quadros[${i}].descricao=this.innerText; salvarEstado();">${q.descricao}</div>
-                    
-                    <label style="margin-top:10px;">Texto do Narrador (Recordatório):</label>
-                    <div class="editavel" contenteditable="true" style="background:#202938;" onblur="projetoHQ.quadros[${i}].narrador=this.innerText; salvarEstado();">${q.narrador}</div>
-                    
-                    <label style="margin-top:10px;">Balões de Fala:</label>
-                    <div class="editavel" contenteditable="true" style="background:#1e293b; color:#93c5fd;" onblur="projetoHQ.quadros[${i}].falas=this.innerText; salvarEstado();">${q.falas}</div>
-
-                    <label style="margin-top:10px;">Onomatopeia Visual (Efeito Sonoro SFX):</label>
-                    <div class="editavel" contenteditable="true" style="background:#2b1919; color:#facc15; font-weight:bold;" onblur="projetoHQ.quadros[${i}].onomatopeia=this.innerText; salvarEstado();">${q.onomatopeia}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // =========================================================================
-        // 3ª ETAPA: PROMPTS COM TRAVA & PROPORÇÃO (--ar)
-        // =========================================================================
-        async function gerarEtapa3() {
-            document.getElementById('load-3').style.display = "block";
-
-            // Determina a tag de proporção com base no formato
-            let tagAR = "--ar 16:9";
-            if (projetoHQ.formato === "webtoon") tagAR = "--ar 9:16";
-            if (projetoHQ.formato === "carrossel") tagAR = "--ar 1:1";
-
-            const prompt = `
-Você é um Especialista em Engenharia de Prompts para Quadrinhos (Midjourney v6 e Leonardo AI).
-Gere os prompts em INGLÊS para cada um destes ${projetoHQ.quadros.length} quadros:
-${JSON.stringify(projetoHQ.quadros.map(q => ({ numero: q.numero, enquadramento: q.enquadramento, descricao: q.descricao })))}
-
-REGRAS OBRIGATÓRIAS:
-1. Incorpore compulsoriamente a descrição de DNA e roupas fixas dos personagens presentes na cena:
-${JSON.stringify(projetoHQ.personagens)}
-2. Termine TODOS os prompts com o estilo visual "${projetoHQ.estilo}" e a proporção de tela "${tagAR}".
-
-RESPONDA EXCLUSIVAMENTE COM JSON:
-{
-  "prompts": [
-    {
-      "numero": 1,
-      "prompt": "cinematic comic book panel illustration, [camera angle], [scene action], [character exact visual dna], dramatic lighting, ${tagAR}"
-    }
-  ]
-}
-`;
-            try {
-                const res = await chamarGemini(prompt);
-                res.prompts.forEach((p, i) => {
-                    if (projetoHQ.quadros[i]) {
-                        projetoHQ.quadros[i].prompt = p.prompt;
-                    }
-                });
-                renderizarEtapa3();
-                salvarEstado();
-            } catch (e) {
-                alert("Erro ao gerar prompts com trava.");
-            } finally {
-                document.getElementById('load-3').style.display = "none";
-            }
-        }
-
-        function renderizarEtapa3() {
-            const container = document.getElementById('listaPrompts');
-            container.innerHTML = "";
-            projetoHQ.quadros.forEach((q, i) => {
-                const card = document.createElement('div');
-                card.className = "bloco-editavel";
-                card.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
-                        <h4 style="color:var(--dourado);">Quadro ${q.numero} - Prompt com Trava</h4>
-                        <button class="btn-voltar" style="padding:4px 10px; font-size:0.8rem;" onclick="navigator.clipboard.writeText(projetoHQ.quadros[${i}].prompt); mostrarToast('Copiado!');">Copiar Prompt</button>
-                    </div>
-                    <div class="editavel" style="font-family:monospace; color:#a7f3d0; font-size:0.85rem;" contenteditable="true" onblur="projetoHQ.quadros[${i}].prompt=this.innerText; salvarEstado();">${q.prompt}</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // =========================================================================
-        // 4ª ETAPA: MONTAGEM DOS QUADROS (UPLOAD DAS ARTES)
-        // =========================================================================
-        function renderizarEtapa4() {
-            const container = document.getElementById('listaUploads');
-            container.innerHTML = "";
-            projetoHQ.quadros.forEach((q, i) => {
-                const card = document.createElement('div');
-                card.className = "quadro-producao";
-                card.innerHTML = `
-                    <h4>Quadro ${q.numero} (${q.enquadramento})</h4>
-                    <p style="color:var(--texto-secundario); font-size:0.85rem; margin-bottom:10px;">${q.descricao}</p>
-                    <div class="caixa-imagem-baloes" onclick="document.getElementById('img-file-${i}').click()" style="cursor:pointer;">
-                        ${q.imagem 
-                            ? `<img src="${q.imagem}">` 
-                            : `<div style="text-align:center; color:var(--texto-secundario);">🖼️ Clique para anexar a arte deste quadro (da sua pasta do Drive)</div>`
-                        }
-                    </div>
-                    <input type="file" id="img-file-${i}" style="display:none;" accept="image/*" onchange="carregarImagem(${i}, event)">
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        function carregarImagem(index, event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    projetoHQ.quadros[index].imagem = e.target.result;
-                    renderizarEtapa4();
-                    salvarEstado();
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // =========================================================================
-        // 5ª ETAPA: BALÕES & ONOMATOPEIAS SOBREPOSTAS
-        // =========================================================================
-        function renderizarEtapa5() {
-            const container = document.getElementById('listaBaloesEdicao');
-            container.innerHTML = "";
-            projetoHQ.quadros.forEach((q, i) => {
-                const card = document.createElement('div');
-                card.className = "quadro-producao";
-                card.innerHTML = `
-                    <h4>Quadro ${q.numero} • Edição Visual de Balões e SFX</h4>
-                    <div class="caixa-imagem-baloes">
-                        ${q.imagem ? `<img src="${q.imagem}">` : `<div style="color:#666;">Sem imagem (Anexe na Etapa 4)</div>`}
-                        ${q.narrador ? `<div class="recordatorio-overlay editavel" contenteditable="true" onblur="projetoHQ.quadros[${i}].narrador=this.innerText; salvarEstado();">${q.narrador}</div>` : ''}
-                        ${q.falas ? `<div class="balao-hq-overlay editavel" style="bottom:20px; left:20px;" contenteditable="true" onblur="projetoHQ.quadros[${i}].falas=this.innerText; salvarEstado();">${q.falas}</div>` : ''}
-                        ${q.onomatopeia ? `<div class="sfx-overlay editavel" contenteditable="true" onblur="projetoHQ.quadros[${i}].onomatopeia=this.innerText; salvarEstado();">${q.onomatopeia}</div>` : ''}
-                    </div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // =========================================================================
-        // ETAPA FINAL: LEITOR DE REVISTA DIGITAL HÍBRIDA
-        // =========================================================================
-        function alternarModoLeitor(modo) {
-            const leitor = document.getElementById('revistaConteudo');
-            if (modo === 'webtoon') {
-                leitor.className = "revista-leitor modo-webtoon";
-                mostrarToast("Modo Webtoon (Rolagem Celular) ativado!");
-            } else {
-                leitor.className = "revista-leitor";
-                mostrarToast("Modo Revista Clássica ativado!");
-            }
-        }
-
-        function renderizarEtapa6() {
-            const container = document.getElementById('revistaConteudo');
-            container.innerHTML = "";
-
-            if (projetoHQ.formato === 'webtoon') {
-                container.className = "revista-leitor modo-webtoon";
-            } else {
-                container.className = "revista-leitor";
-            }
-
-            const cabecalho = document.createElement('div');
-            cabecalho.style.textAlign = "center";
-            cabecalho.style.color = "#fff";
-            cabecalho.style.marginBottom = "20px";
-            cabecalho.innerHTML = `
-                <h1 style="color:var(--dourado); font-size:2.2rem; text-transform:uppercase;">${projetoHQ.titulo || "Título do Capítulo"}</h1>
-                <p style="color:#93c5fd; font-style:italic;">${projetoHQ.sinopse || ""}</p>
-            `;
-            container.appendChild(cabecalho);
-
-            projetoHQ.quadros.forEach((q) => {
-                const pagina = document.createElement('div');
-                pagina.className = "pagina-revista";
-                pagina.innerHTML = `
-                    <div style="position:relative;">
-                        ${q.imagem ? `<img src="${q.imagem}">` : `<div style="height:320px; background:#111; display:flex; align-items:center; justify-content:center; color:#fff;">Quadro ${q.numero}</div>`}
-                        ${q.narrador ? `<div class="recordatorio-overlay">${q.narrador}</div>` : ''}
-                        ${q.falas ? `<div class="balao-hq-overlay" style="bottom:20px; left:20px;">${q.falas}</div>` : ''}
-                        ${q.onomatopeia ? `<div class="sfx-overlay">${q.onomatopeia}</div>` : ''}
-                    </div>
-                `;
-                container.appendChild(pagina);
-            });
-        }
-
-        function salvarCapituloFinal() {
-            const blob = new Blob([JSON.stringify(projetoHQ, null, 2)], { type: 'application/json' });
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `${projetoHQ.titulo || 'capitulo-hq'}.json`;
-            link.click();
-            mostrarToast("Capítulo salvo em seu computador!");
-        }
-
-        function restaurarInterface() {
-            if (projetoHQ.titulo) document.getElementById('resTitulo').innerText = projetoHQ.titulo;
-            if (projetoHQ.sinopse) document.getElementById('resSinopse').innerText = projetoHQ.sinopse;
-            if (projetoHQ.formato) document.getElementById('formatoPublicacao').value = projetoHQ.formato;
-            renderizarPersonagens();
-            renderizarEtapa2();
-            renderizarEtapa3();
-            if (projetoHQ.etapaAtual) irParaEtapa(projetoHQ.etapaAtual);
-        }
-
-        async function chamarGemini(promptTexto) {
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${CHAVE_GEMINI}`;
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: promptTexto }] }] })
-            });
-            const data = await res.json();
-            let texto = data.candidates[0].content.parts[0].text;
-            texto = texto.replace(/```json/gi, '').replace(/```/gi, '').trim();
-            return JSON.parse(texto);
-        }
-
-        function mostrarToast(msg) {
-            const t = document.getElementById('toast');
-            t.innerText = msg;
-            t.style.display = "block";
-            setTimeout(() => { t.style.display = "none"; }, 2500);
-        }
-    </script>
-</body>
-</html>
